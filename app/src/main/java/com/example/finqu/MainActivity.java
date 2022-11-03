@@ -11,10 +11,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.finqu.Controller.TransactionItemController;
 import com.example.finqu.Data.GlobalData;
+import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     EditText txtStartDate;
     EditText txtEndDate;
     ImageView btnSetting;
+    FloatingActionButton btnRefresh;
 
     private String dateState = "start";
+    private boolean isFetchingNewData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         txtStartDate = findViewById(R.id.mainTxtStartDate);
         txtEndDate = findViewById(R.id.mainTxtEndDate);
         btnSetting = findViewById(R.id.mainBtnSetting);
+        btnRefresh = findViewById(R.id.mainBtnRefresh);
 
         txtStartDate.setKeyListener(null);
         txtEndDate.setKeyListener(null);
@@ -128,6 +133,35 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isFetchingNewData) {
+                    isFetchingNewData = true;
+                    LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
+                    loadingDialog.ShowDialog("Fetching new data ...");
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            GlobalData.FetchNewData();
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    isFetchingNewData = false;
+                                    loadingDialog.DismissDialog();
+
+                                    LoadTransactionList();
+                                    LoadTodayExpenses();
+                                }
+                            });
+                        }
+                    }).start();
+                }
             }
         });
     }

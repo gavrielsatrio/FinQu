@@ -235,4 +235,19 @@
         app:layout_constraintTop_toTopOf="@+id/mainTxtStartDate"
         app:srcCompat="@drawable/ic_round_horizontal_rule_24" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mainBtnRefresh"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:clickable="true"
+        app:elevation="2dp"
+        app:fabCustomSize="28dp"
+        app:fabSize="mini"
+        app:hoveredFocusedTranslationZ="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/mainScrollViewTransactionItem"
+        app:layout_constraintTop_toTopOf="@+id/mainScrollViewTransactionItem"
+        app:maxImageSize="14dp"
+        app:pressedTranslationZ="3dp"
+        app:srcCompat="@drawable/ic_baseline_refresh_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

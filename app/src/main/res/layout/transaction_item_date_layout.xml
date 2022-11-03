@@ -8,6 +8,8 @@
         android:id="@+id/transactionItemDateLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="@font/sf_pro_display_medium"
         android:text="Senin, 01 Oktober 2022"
         android:textSize="14sp"
