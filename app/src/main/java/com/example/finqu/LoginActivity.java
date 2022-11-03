@@ -14,9 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.finqu.Controller.AccessCodeController;
+import com.example.finqu.Helper.AccessCodeTxtHelper;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtCode5;
     EditText txtCode6;
     Button btnLogin;
-
-    EditText currentTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,29 +44,23 @@ public class LoginActivity extends AppCompatActivity {
         txtCode5 = findViewById(R.id.loginTxtCode5);
         txtCode6 = findViewById(R.id.loginTxtCode6);
 
-        currentTxt = txtCode1;
-
         EditText[] txtCodes = new EditText[]
         {
-                txtCode1,
-                txtCode2,
-                txtCode3,
-                txtCode4,
-                txtCode5,
-                txtCode6
+            txtCode1,
+            txtCode2,
+            txtCode3,
+            txtCode4,
+            txtCode5,
+            txtCode6
         };
+
+        AccessCodeTxtHelper helperTxtCodes = new AccessCodeTxtHelper();
+        helperTxtCodes.BindAllListener(txtCodes);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean isCodeValid;
-                String inputtedCode = "";
-                for (int i = 0; i < txtCodes.length; i++) {
-                    inputtedCode += txtCodes[i].getText().toString();
-                }
-
-                isCodeValid = inputtedCode.equals(AccessCodeController.getCode(LoginActivity.this));
-                if(isCodeValid) {
+                if(helperTxtCodes.GetJoinedAccessCode(txtCodes).equals(AccessCodeController.getCode(LoginActivity.this))) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -76,50 +71,5 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-        TextWatcher txtCodeTextWather = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                View theFollowingTxt;
-
-                if(!currentTxt.getText().toString().equals("")) {
-                    theFollowingTxt = currentTxt.focusSearch(View.FOCUS_RIGHT);
-                } else {
-                    theFollowingTxt = currentTxt.focusSearch(View.FOCUS_LEFT);
-                }
-
-                if(theFollowingTxt != null) {
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            LoginActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    currentTxt = (EditText) theFollowingTxt;
-                                    theFollowingTxt.requestFocus();
-                                }
-                            });
-                        }
-                    }, 0);
-                }
-            }
-        };
-
-        txtCode1.addTextChangedListener(txtCodeTextWather);
-        txtCode2.addTextChangedListener(txtCodeTextWather);
-        txtCode3.addTextChangedListener(txtCodeTextWather);
-        txtCode4.addTextChangedListener(txtCodeTextWather);
-        txtCode5.addTextChangedListener(txtCodeTextWather);
-        txtCode6.addTextChangedListener(txtCodeTextWather);
     }
 }
