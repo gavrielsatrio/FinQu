@@ -17,13 +17,17 @@ public class TransactionTypeHelper {
         this.context = contextParam;
 
         transactionTypeList.put("Beverage", this.context.getResources().getDrawable(R.drawable.beverages, this.context.getTheme()));
-        transactionTypeList.put("Boarding Fee", this.context.getResources().getDrawable(R.drawable.boarding_fee, this.context.getTheme()));
+        transactionTypeList.put("Boarding Fee", this.context.getResources().getDrawable(R.drawable.rent, this.context.getTheme()));
+        transactionTypeList.put("Cake", this.context.getResources().getDrawable(R.drawable.cheesecake, this.context.getTheme()));
         transactionTypeList.put("Desert", this.context.getResources().getDrawable(R.drawable.dessert_2, this.context.getTheme()));
-        transactionTypeList.put("Electricity Token", this.context.getResources().getDrawable(R.drawable.electricity_token, this.context.getTheme()));
+        transactionTypeList.put("Electricity Token", this.context.getResources().getDrawable(R.drawable.flash, this.context.getTheme()));
         transactionTypeList.put("Food", this.context.getResources().getDrawable(R.drawable.food, this.context.getTheme()));
+        transactionTypeList.put("Income", this.context.getResources().getDrawable(R.drawable.money_bag, this.context.getTheme()));
         transactionTypeList.put("Laundry", this.context.getResources().getDrawable(R.drawable.laundry2, this.context.getTheme()));
         transactionTypeList.put("Medicine", this.context.getResources().getDrawable(R.drawable.medicine, this.context.getTheme()));
-        transactionTypeList.put("Shopping", this.context.getResources().getDrawable(R.drawable.shopping, this.context.getTheme()));
+        transactionTypeList.put("Shopping", this.context.getResources().getDrawable(R.drawable.shop_cart, this.context.getTheme()));
+        transactionTypeList.put("Snack", this.context.getResources().getDrawable(R.drawable.popcorn, this.context.getTheme()));
+        transactionTypeList.put("Phone Credit Quota", this.context.getResources().getDrawable(R.drawable.sim, this.context.getTheme()));
         transactionTypeList.put("Transportation", this.context.getResources().getDrawable(R.drawable.transportation, this.context.getTheme()));
         transactionTypeList.put("Travel Ticket Fee", this.context.getResources().getDrawable(R.drawable.ticket2, this.context.getTheme()));
     }
