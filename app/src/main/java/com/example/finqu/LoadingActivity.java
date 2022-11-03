@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
 
 public class LoadingActivity extends AppCompatActivity {
@@ -43,6 +44,10 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void LoadData() {
+        GlobalData.sheetList = new ArrayList<>();
+        GlobalData.transactionList = new ArrayList<>();
+        GlobalData.transactionListGroupByDate = new Hashtable<>();
+
         HttpRequest requestSheets = new HttpRequest("https://sheets.googleapis.com/v4/spreadsheets/1_85IA1IJ2PH4Kb-95rfB5Eqa4I1vffdwtq2FaAShB0A/?key=AIzaSyBc2POX2kNNnxaeuB0Az6DZcD6D27aAIUM", "GET");
         requestSheets.setRequestProperty("Content-Type", "application/json");
         requestSheets.execute();
