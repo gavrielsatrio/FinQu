@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateNewCodeActivity">
+
+    <Button
+        android:id="@+id/createNewCodeBtnCreate"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/btn_primary_background"
+        android:text="Create"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNewCodeConstLayoutTxtCode" />
+
+    <ImageView
+        android:id="@+id/createNewCodeImgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/createNewCodeLblLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/finqu_transparent" />
+
+    <TextView
+        android:id="@+id/createNewCodeLblDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/sf_pro_display_light"
+        android:text="It seems like you are new here, please create a new access code first!"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/createNewCodeConstLayoutTxtCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNewCodeLblLogin" />
+
+    <TextView
+        android:id="@+id/createNewCodeLblLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="Hello!"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/createNewCodeLblDesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNewCodeImgLogo"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/createNewCodeConstLayoutTxtCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/createNewCodeBtnCreate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNewCodeLblDesc">
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/createNewCodeTxtCode2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/createNewCodeTxtCode3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createNewCodeTxtCode1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/createNewCodeTxtCode4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createNewCodeTxtCode2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/createNewCodeTxtCode5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createNewCodeTxtCode3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/createNewCodeTxtCode6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createNewCodeTxtCode4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createNewCodeTxtCode6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/text_box_background"
+            android:ems="10"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:inputType="textPassword"
+            android:maxLength="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createNewCodeTxtCode5"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
