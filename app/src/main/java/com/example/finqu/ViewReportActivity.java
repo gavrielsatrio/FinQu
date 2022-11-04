@@ -81,6 +81,8 @@ public class ViewReportActivity extends AppCompatActivity {
 
     private void LoadComboMonth() {
         comboBoxMonth.setAdapter(new ComboBoxAdapter(ViewReportActivity.this, GlobalData.sheetList));
+
+        comboBoxMonth.setSelection(GlobalData.sheetList.indexOf(DateHelper.getMonthAndYearFromDate(DateHelper.getDateNow())));
     }
 
     private int totalMonthExpense = 0;
