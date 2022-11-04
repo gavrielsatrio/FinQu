@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.finqu.Controller.AccessCodeController;
 import com.example.finqu.Helper.AccessCodeTxtHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CreateNewCodeActivity extends AppCompatActivity {
 
@@ -60,7 +61,9 @@ public class CreateNewCodeActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 } else {
-                    Toast.makeText(CreateNewCodeActivity.this, "Code must be 6 characters", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Code must be 6 characters", Snackbar.LENGTH_SHORT)
+                            .setTextColor(CreateNewCodeActivity.this.getResources().getColor(R.color.white, CreateNewCodeActivity.this.getTheme()))
+                            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
                 }
             }
         });

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.finqu.Controller.AccessCodeController;
 import com.example.finqu.Helper.AccessCodeTxtHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ChangeAccessCodeActivity extends AppCompatActivity {
 
@@ -124,17 +125,25 @@ public class ChangeAccessCodeActivity extends AppCompatActivity {
                         if(confirmAccessCode.equals(newAccessCode)) {
                             AccessCodeController.setCode(newAccessCode, ChangeAccessCodeActivity.this);
 
-                            Toast.makeText(ChangeAccessCodeActivity.this, "Access code successfully changed", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(view, "Access code successfully changed", Snackbar.LENGTH_SHORT)
+                                    .setTextColor(ChangeAccessCodeActivity.this.getResources().getColor(R.color.white, ChangeAccessCodeActivity.this.getTheme()))
+                                    .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
 
                             ChangeAccessCodeActivity.super.onBackPressed();
                         } else {
-                            Toast.makeText(ChangeAccessCodeActivity.this, "Confirm access code doesn't match", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(view, "Confirm access code doesn't match", Snackbar.LENGTH_SHORT)
+                                    .setTextColor(ChangeAccessCodeActivity.this.getResources().getColor(R.color.white, ChangeAccessCodeActivity.this.getTheme()))
+                                    .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
                         }
                     } else {
-                        Toast.makeText(ChangeAccessCodeActivity.this, "New access code must be 6 characters", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "New access code must be 6 characters", Snackbar.LENGTH_SHORT)
+                                .setTextColor(ChangeAccessCodeActivity.this.getResources().getColor(R.color.white, ChangeAccessCodeActivity.this.getTheme()))
+                                .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
                     }
                 } else {
-                    Toast.makeText(ChangeAccessCodeActivity.this, "Old access code is wrong", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Old access code is wrong", Snackbar.LENGTH_SHORT)
+                            .setTextColor(ChangeAccessCodeActivity.this.getResources().getColor(R.color.white, ChangeAccessCodeActivity.this.getTheme()))
+                            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
                 }
             }
         });

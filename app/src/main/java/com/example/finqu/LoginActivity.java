@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.finqu.Controller.AccessCodeController;
 import com.example.finqu.Helper.AccessCodeTxtHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
 import java.util.Timer;
@@ -67,7 +68,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Code is not valid", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Code is not valid", Snackbar.LENGTH_SHORT)
+                            .setTextColor(LoginActivity.this.getResources().getColor(R.color.white, LoginActivity.this.getTheme()))
+                            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE).show();
                 }
             }
         });
