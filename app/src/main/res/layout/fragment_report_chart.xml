@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/viewReportLblMonth"
+        android:id="@+id/reportChartLblMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_pro_display_medium"
@@ -16,16 +16,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/viewReportComboMonth"
+        android:id="@+id/reportChartComboMonth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewReportLblMonth" />
+        app:layout_constraintTop_toBottomOf="@+id/reportChartLblMonth" />
 
     <TextView
-        android:id="@+id/viewReportLblTotalExpense"
+        android:id="@+id/reportChartLblTotalExpense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_pro_display_bold"
@@ -36,19 +36,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <HorizontalScrollView
-        android:id="@+id/viewReportScrollViewChart"
+        android:id="@+id/reportChartScrollViewChart"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/viewReportLblTotalExpense"
+        app:layout_constraintBottom_toTopOf="@+id/reportChartLblTotalExpense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewReportComboMonth">
+        app:layout_constraintTop_toBottomOf="@+id/reportChartComboMonth">
 
         <ImageView
-            android:id="@+id/viewReportImgChart"
+            android:id="@+id/reportChartImgChart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"

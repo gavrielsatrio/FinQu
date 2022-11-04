@@ -48,9 +48,9 @@ public class ReportChartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewInflate = inflater.inflate(R.layout.fragment_report_chart, container, false);
 
-        comboBoxMonth = viewInflate.findViewById(R.id.viewReportComboMonth);
-        imgChart = viewInflate.findViewById(R.id.viewReportImgChart);
-        lblTotal = viewInflate.findViewById(R.id.viewReportLblTotalExpense);
+        comboBoxMonth = viewInflate.findViewById(R.id.reportChartComboMonth);
+        imgChart = viewInflate.findViewById(R.id.reportChartImgChart);
+        lblTotal = viewInflate.findViewById(R.id.reportChartLblTotalExpense);
 
         imgChart.setImageBitmap(null);
 
