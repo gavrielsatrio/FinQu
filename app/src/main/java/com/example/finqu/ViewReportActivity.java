@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.finqu.Fragment.ReportChartFragment;
+import com.example.finqu.Fragment.ReportTransactionOfTheMonthFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Hashtable;
@@ -29,7 +30,7 @@ public class ViewReportActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.viewReportTabLayout);
 
         reportFragmentList.put("Chart", new ReportChartFragment(ViewReportActivity.this));
-        reportFragmentList.put("Transaction Of The Month", new ReportChartFragment(ViewReportActivity.this));
+        reportFragmentList.put("Transaction Of The Month", new ReportTransactionOfTheMonthFragment(ViewReportActivity.this));
 
         LoadReportFragment("Chart");
 

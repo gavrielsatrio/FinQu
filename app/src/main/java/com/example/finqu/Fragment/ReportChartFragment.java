@@ -119,7 +119,7 @@ public class ReportChartFragment extends Fragment {
         int maxYData = 0;
         for (int i = 0; i < dayCount; i++) {
             Date transactionDate = transactionDateList.get(i);
-            ArrayList<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
+            List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
 
             paint.setColor(viewReportActivity.getResources().getColor(R.color.darkgray, viewReportActivity.getTheme()));
             paint.setTextSize(28f);
@@ -148,7 +148,7 @@ public class ReportChartFragment extends Fragment {
 
         for (int i = 0; i < dayCount; i++) {
             Date transactionDate = transactionDateList.get(i);
-            ArrayList<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
+            List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
 
             int perDayOutAmount = 0;
             int perDayInAmount = 0;

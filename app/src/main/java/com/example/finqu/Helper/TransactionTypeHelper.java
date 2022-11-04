@@ -40,7 +40,7 @@ public class TransactionTypeHelper {
         return TransactionTypeHelper.instance;
     }
 
-    public Drawable getPaymentIcon(String paymentType) {
-        return transactionTypeList.get(paymentType);
+    public Drawable getTransactionTypeIcon(String transactionType) {
+        return transactionTypeList.get(transactionType);
     }
 }

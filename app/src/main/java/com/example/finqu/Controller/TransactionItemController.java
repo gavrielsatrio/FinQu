@@ -3,7 +3,6 @@ package com.example.finqu.Controller;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.IntegerRes;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -54,7 +52,7 @@ public class TransactionItemController {
     public void setDataAndEventsToView() {
         lblName.setText(currentTransaction.Name);
         lblPaymentType.setText(currentTransaction.PaymentType);
-        imgTransactionType.setImageDrawable(TransactionTypeHelper.getInstance(context).getPaymentIcon(currentTransaction.TransactionType));
+        imgTransactionType.setImageDrawable(TransactionTypeHelper.getInstance(context).getTransactionTypeIcon(currentTransaction.TransactionType));
 
         Integer amountView = currentTransaction.Amount;
 

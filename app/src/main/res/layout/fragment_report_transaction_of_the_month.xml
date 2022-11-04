@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblFirstValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:text="1st"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintTop_toBottomOf="@+id/reportTransactionOfTheMonthImgFirst" />
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblSecondValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:text="2nd"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond" />
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblThirdValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:text="3rd"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthPodiumFirst"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintTop_toBottomOf="@+id/reportTransactionOfTheMonthLblFirstValue"
+        app:srcCompat="@color/master_card_2" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthPodiumSecond"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/master_card_2" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthPodiumThird"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@color/master_card_2" />
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="1st"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumFirst" />
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="2nd"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond" />
+
+    <TextView
+        android:id="@+id/reportTransactionOfTheMonthLblThird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="3rd"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumThird" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthImgFirst"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/food" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthImgSecond"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthLblSecondValue"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/food" />
+
+    <ImageView
+        android:id="@+id/reportTransactionOfTheMonthImgThird"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthLblThirdValue"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/food" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
