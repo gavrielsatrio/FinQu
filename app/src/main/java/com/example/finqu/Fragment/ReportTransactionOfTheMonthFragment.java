@@ -1,10 +1,10 @@
 package com.example.finqu.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +21,7 @@ import com.example.finqu.R;
 import com.example.finqu.ViewReportActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,11 +55,18 @@ public class ReportTransactionOfTheMonthFragment extends Fragment {
             }
         });
 
-        ImageView[] imageViewList = new ImageView[]
+        ImageView[] imageViewPodiumList = new ImageView[]
         {
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgFirst),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgSecond),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgThird)
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumFirst),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumSecond),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumThird)
+        };
+
+        TextView[] lblRankList = new TextView[]
+        {
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblFirst),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblSecond),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblThird)
         };
 
         TextView[] lblValueList = new TextView[]
@@ -72,11 +76,25 @@ public class ReportTransactionOfTheMonthFragment extends Fragment {
                 viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblThirdValue)
         };
 
-        for (int i = 0; i < imageViewList.length; i++) {
+        ImageView[] imageViewTransactionTypeList = new ImageView[]
+        {
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgFirst),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgSecond),
+                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgThird)
+        };
+
+        for (int i = imageViewTransactionTypeList.length - 1; i >= 0; i--) {
             String transactionType = transactionTypeSum.get(i).TransactionType;
 
-            imageViewList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
+            imageViewPodiumList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+
+            lblRankList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+
             lblValueList[i].setText(transactionType);
+            lblValueList[i].animate().setStartDelay(200 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+
+            imageViewTransactionTypeList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
+            imageViewTransactionTypeList[i].animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
         }
 
         return viewInflate;
