@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finqu.Fragment.ReportChartFragment;
@@ -33,6 +34,13 @@ public class ViewReportActivity extends AppCompatActivity {
         reportFragmentList.put("Transaction Of The Month", new ReportTransactionOfTheMonthFragment(ViewReportActivity.this));
 
         LoadReportFragment("Chart");
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewReportActivity.super.onBackPressed();
+            }
+        });
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

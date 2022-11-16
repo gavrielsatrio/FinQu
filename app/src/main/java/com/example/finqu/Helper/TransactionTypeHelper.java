@@ -16,6 +16,8 @@ public class TransactionTypeHelper {
     private TransactionTypeHelper(Context contextParam) {
         this.context = contextParam;
 
+        transactionTypeList.put("Bank Admin Fee", this.context.getResources().getDrawable(R.drawable.invoice, this.context.getTheme()));
+        transactionTypeList.put("Bank Transfer", this.context.getResources().getDrawable(R.drawable.bank_transfer, this.context.getTheme()));
         transactionTypeList.put("Beverage", this.context.getResources().getDrawable(R.drawable.beverages, this.context.getTheme()));
         transactionTypeList.put("Boarding Fee", this.context.getResources().getDrawable(R.drawable.rent, this.context.getTheme()));
         transactionTypeList.put("Cake", this.context.getResources().getDrawable(R.drawable.cheesecake, this.context.getTheme()));

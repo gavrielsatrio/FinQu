@@ -22,6 +22,7 @@ public class PaymentTypeHelper {
         paymentTypeList.put("Flazz", this.context.getResources().getDrawable(R.drawable.flazz, this.context.getTheme()));
         paymentTypeList.put("GoPay", this.context.getResources().getDrawable(R.drawable.gopay, this.context.getTheme()));
         paymentTypeList.put("JakCard", this.context.getResources().getDrawable(R.drawable.jakcard, this.context.getTheme()));
+        paymentTypeList.put("Livin Mandiri", this.context.getResources().getDrawable(R.drawable.livin_mandiri, this.context.getTheme()));
         paymentTypeList.put("OVO", this.context.getResources().getDrawable(R.drawable.ovo, this.context.getTheme()));
         paymentTypeList.put("QRIS", this.context.getResources().getDrawable(R.drawable.qris, this.context.getTheme()));
     }
