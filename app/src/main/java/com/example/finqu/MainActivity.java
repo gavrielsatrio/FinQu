@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -19,10 +20,14 @@ import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
+import com.example.finqu.Model.Transaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -139,35 +144,39 @@ public class MainActivity extends AppCompatActivity {
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isFetchingNewData) {
-                    isFetchingNewData = true;
-                    LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
-                    loadingDialog.ShowDialog("Fetching new data ...");
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            GlobalData.FetchNewData();
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    isFetchingNewData = false;
-                                    loadingDialog.DismissDialog();
-
-                                    LoadTransactionList();
-                                    LoadTodayExpenses();
-                                }
-                            });
-                        }
-                    }).start();
-                }
+                RefreshData();
             }
         });
     }
 
     String currentDateOnList = "";
     Integer totalTodayExpense = 0;
+
+    private void RefreshData() {
+        if(!isFetchingNewData) {
+            isFetchingNewData = true;
+            LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
+            loadingDialog.ShowDialog("Fetching new data ...");
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    GlobalData.FetchNewData();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            isFetchingNewData = false;
+                            loadingDialog.DismissDialog();
+
+                            LoadTransactionList();
+                            LoadTodayExpenses();
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
 
     private void LoadTransactionList() {
         currentDateOnList = "";
@@ -177,13 +186,27 @@ public class MainActivity extends AppCompatActivity {
         Date startDate = DateHelper.convertToDateFromShortString(txtStartDate.getText().toString());
         Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
 
-        GlobalData.transactionList.stream().filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate)).forEach(x ->
+        List<Transaction> query = GlobalData.transactionList.stream().filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate)).collect(Collectors.toList());
+        query.forEach(x ->
         {
             if(!currentDateOnList.equals(DateHelper.convertToStringFromDate(x.Date))) {
                 currentDateOnList = DateHelper.convertToStringFromDate(x.Date);
 
                 View transactionDateView = LayoutInflater.from(MainActivity.this).inflate(R.layout.transaction_item_date_layout, null, false);
+
+                if(x.Date.equals(query.get(0).Date)) {
+                    FloatingActionButton btnRefreshOnItemDate = transactionDateView.findViewById(R.id.transactionItemDateBtnRefresh);
+                    btnRefreshOnItemDate.setVisibility(View.VISIBLE);
+                    btnRefreshOnItemDate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            RefreshData();
+                        }
+                    });
+                }
+
                 ((TextView)transactionDateView.findViewById(R.id.transactionItemDateLbl)).setText(currentDateOnList);
+
                 linearLayoutTransaction.addView(transactionDateView);
             }
 
@@ -192,6 +215,12 @@ public class MainActivity extends AppCompatActivity {
 
             linearLayoutTransaction.addView(itemLayout.getView());
         });
+
+        if(linearLayoutTransaction.getChildCount() == 0) {
+            btnRefresh.setVisibility(View.VISIBLE);
+        } else {
+            btnRefresh.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void LoadTodayExpenses() {

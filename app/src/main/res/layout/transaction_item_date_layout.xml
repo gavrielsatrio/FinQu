@@ -4,6 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/transactionItemDateBtnRefresh"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:elevation="2dp"
+        app:fabCustomSize="28dp"
+        app:fabSize="mini"
+        app:hoveredFocusedTranslationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="14dp"
+        app:pressedTranslationZ="3dp"
+        app:srcCompat="@drawable/ic_baseline_refresh_24" />
+
     <TextView
         android:id="@+id/transactionItemDateLbl"
         android:layout_width="wrap_content"
