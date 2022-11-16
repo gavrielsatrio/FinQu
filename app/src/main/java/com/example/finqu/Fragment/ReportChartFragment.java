@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,10 +101,19 @@ public class ReportChartFragment extends Fragment {
 
     private void LoadChart() {
         int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).count();
-        int dataXDistance = 130;
-        int barChartWidth = 50;
-        Integer bitmapHeight = 1000;
-        Integer xAxisLabelHeight = 90;
+        int barChartWidth = 70;
+        float halfBarChartWidth = barChartWidth / 2f;
+
+        int dataXDistance = barChartWidth + 80;
+
+        int xAxisLabelHeight = 90;
+        int xAxisLabelMarginBottom = 35;
+        float xAxisLabelFontSize = 28f;
+
+        int bitmapHeight = 1000;
+        int bitmapTopBottomPadding = 20;
+        int chartHeight = bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding;
+
 
         Bitmap bitmap = Bitmap.createBitmap(dayCount * dataXDistance, bitmapHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -116,20 +126,20 @@ public class ReportChartFragment extends Fragment {
         List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).collect(Collectors.toList()));
         Collections.sort(transactionDateList);
 
-        int maxYData = 0;
+        double maxYData = 0;
         for (int i = 0; i < dayCount; i++) {
             Date transactionDate = transactionDateList.get(i);
             List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
 
             paint.setColor(viewReportActivity.getResources().getColor(R.color.darkgray, viewReportActivity.getTheme()));
-            paint.setTextSize(28f);
+            paint.setTextSize(xAxisLabelFontSize);
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setStyle(Paint.Style.FILL);
 
-            canvas.drawText(DateHelper.convertToSuperShortStringFromDate(transactionDate), dataXDistance * (i + 0.5f), bitmapHeight - 35, paint);
+            canvas.drawText(DateHelper.convertToSuperShortStringFromDate(transactionDate), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
 
-            int perDayOutAmount = 0;
-            int perDayInAmount = 0;
+            double perDayOutAmount = 0;
+            double perDayInAmount = 0;
             for (int j = 0; j < transactionList.size(); j++) {
                 Transaction x = transactionList.get(j);
 
@@ -140,18 +150,28 @@ public class ReportChartFragment extends Fragment {
                 }
             }
 
-            int perDayCumulative = perDayOutAmount >= perDayInAmount ? perDayOutAmount - perDayInAmount : perDayInAmount - perDayOutAmount;
-            if(perDayCumulative >= maxYData) {
-                maxYData = perDayCumulative;
+            if(perDayOutAmount > perDayInAmount) {
+                if(perDayOutAmount > maxYData) {
+                    maxYData = perDayOutAmount;
+                }
+            } else {
+                if(perDayInAmount > maxYData) {
+                    maxYData = perDayInAmount;
+                }
             }
+
+//            int perDayCumulative = perDayOutAmount >= perDayInAmount ? perDayOutAmount - perDayInAmount : perDayInAmount - perDayOutAmount;
+//            if(perDayCumulative >= maxYData) {
+//                maxYData = perDayCumulative;
+//            }
         }
 
         for (int i = 0; i < dayCount; i++) {
             Date transactionDate = transactionDateList.get(i);
             List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
 
-            int perDayOutAmount = 0;
-            int perDayInAmount = 0;
+            double perDayOutAmount = 0;
+            double perDayInAmount = 0;
             for (int j = 0; j < transactionList.size(); j++) {
                 Transaction x = transactionList.get(j);
 
@@ -162,16 +182,28 @@ public class ReportChartFragment extends Fragment {
                 }
             }
 
-            int perDayCumulative = 0;
-            if(perDayOutAmount > perDayInAmount) {
-                perDayCumulative = perDayOutAmount - perDayInAmount;
-                paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
-            } else {
-                perDayCumulative = perDayInAmount - perDayOutAmount;
-                paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
-            }
+            float startXChartCanvas = dataXDistance * (i + 0.5f) - halfBarChartWidth;
+            float endXChartCanvas = dataXDistance * (i + 0.5f) + halfBarChartWidth;
 
-            canvas.drawRoundRect(dataXDistance * (i + 0.5f) - (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - 20 - ((perDayCumulative / (float)maxYData) * (bitmapHeight - xAxisLabelHeight - 20)), dataXDistance * (i + 0.5f) + (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - 20, 8, 8, paint);
+            float outBarChartHeight = ((float)perDayOutAmount / (float)maxYData) * chartHeight;
+            float inBarChartHeight = ((float)perDayInAmount / (float)maxYData) * chartHeight;
+
+            paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
+            canvas.drawRoundRect(startXChartCanvas, chartHeight - outBarChartHeight, endXChartCanvas - halfBarChartWidth, chartHeight, 8, 8, paint);
+
+            paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
+            canvas.drawRoundRect(startXChartCanvas + halfBarChartWidth, chartHeight - inBarChartHeight, endXChartCanvas, chartHeight, 8, 8, paint);
+
+//            int perDayCumulative = 0;
+//            if(perDayOutAmount > perDayInAmount) {
+//                perDayCumulative = perDayOutAmount - perDayInAmount;
+//                paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
+//            } else {
+//                perDayCumulative = perDayInAmount - perDayOutAmount;
+//                paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
+//            }
+//
+//            canvas.drawRoundRect(dataXDistance * (i + 0.5f) - (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding - ((perDayCumulative / (float)maxYData) * (bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding)), dataXDistance * (i + 0.5f) + (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding, 8, 8, paint);
         }
 
         imgChart.setImageBitmap(bitmap);
