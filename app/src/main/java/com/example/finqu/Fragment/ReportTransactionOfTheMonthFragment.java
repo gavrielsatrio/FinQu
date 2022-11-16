@@ -72,15 +72,11 @@ public class ReportTransactionOfTheMonthFragment extends Fragment {
                 viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblThirdValue)
         };
 
-        for (int i = 0; i < transactionTypeSum.size(); i++) {
+        for (int i = 0; i < imageViewList.length; i++) {
             String transactionType = transactionTypeSum.get(i).TransactionType;
 
             imageViewList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
             lblValueList[i].setText(transactionType);
-
-            if(i == 2) {
-                break;
-            }
         }
 
         return viewInflate;
