@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblFirstValue"
+        android:id="@+id/reportTransactionRankingLblFirstValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -17,12 +17,12 @@
         android:textColor="@color/black"
         android:textSize="14dp"
         android:translationY="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintTop_toBottomOf="@+id/reportTransactionOfTheMonthImgFirst" />
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintTop_toBottomOf="@+id/reportTransactionRankingImgFirst" />
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblSecondValue"
+        android:id="@+id/reportTransactionRankingLblSecondValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -33,12 +33,12 @@
         android:textColor="@color/black"
         android:textSize="14dp"
         android:translationY="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond" />
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumSecond" />
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblThirdValue"
+        android:id="@+id/reportTransactionRankingLblThirdValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -49,12 +49,12 @@
         android:textColor="@color/black"
         android:textSize="14dp"
         android:translationY="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthPodiumThird"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird" />
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionRankingPodiumThird"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumThird" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthPodiumFirst"
+        android:id="@+id/reportTransactionRankingPodiumFirst"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -64,14 +64,14 @@
         android:elevation="6dp"
         android:translationY="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintEnd_toStartOf="@+id/reportTransactionRankingPodiumThird"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintTop_toBottomOf="@+id/reportTransactionOfTheMonthLblFirstValue"
+        app:layout_constraintStart_toEndOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintTop_toBottomOf="@+id/reportTransactionRankingLblFirstValue"
         app:srcCompat="@color/master_card_2" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthPodiumSecond"
+        android:id="@+id/reportTransactionRankingPodiumSecond"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -80,16 +80,16 @@
         android:elevation="4dp"
         android:translationY="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintEnd_toStartOf="@+id/reportTransactionRankingPodiumFirst"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionRankingPodiumFirst"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@color/master_card_2" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthPodiumThird"
+        android:id="@+id/reportTransactionRankingPodiumThird"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="80dp"
@@ -100,13 +100,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintStart_toEndOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionRankingPodiumSecond"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@color/master_card_2" />
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblFirst"
+        android:id="@+id/reportTransactionRankingLblFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -117,12 +117,12 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:translationY="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumFirst" />
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionRankingPodiumFirst" />
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblSecond"
+        android:id="@+id/reportTransactionRankingLblSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -133,12 +133,12 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:translationY="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumSecond" />
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionRankingPodiumSecond" />
 
     <TextView
-        android:id="@+id/reportTransactionOfTheMonthLblThird"
+        android:id="@+id/reportTransactionRankingLblThird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -149,49 +149,49 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:translationY="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
-        app:layout_constraintTop_toTopOf="@+id/reportTransactionOfTheMonthPodiumThird" />
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumThird"
+        app:layout_constraintTop_toTopOf="@+id/reportTransactionRankingPodiumThird" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthImgFirst"
+        android:id="@+id/reportTransactionRankingImgFirst"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:adjustViewBounds="true"
         android:alpha="0"
         android:translationY="36dp"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumFirst"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumFirst"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumFirst"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumFirst"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/food" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthImgSecond"
+        android:id="@+id/reportTransactionRankingImgSecond"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:alpha="0"
         android:translationY="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthLblSecondValue"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumSecond"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumSecond"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionRankingLblSecondValue"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumSecond"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumSecond"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/food" />
 
     <ImageView
-        android:id="@+id/reportTransactionOfTheMonthImgThird"
+        android:id="@+id/reportTransactionRankingImgThird"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:alpha="0"
         android:translationY="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/reportTransactionOfTheMonthLblThirdValue"
-        app:layout_constraintEnd_toEndOf="@+id/reportTransactionOfTheMonthPodiumThird"
-        app:layout_constraintStart_toStartOf="@+id/reportTransactionOfTheMonthPodiumThird"
+        app:layout_constraintBottom_toTopOf="@+id/reportTransactionRankingLblThirdValue"
+        app:layout_constraintEnd_toEndOf="@+id/reportTransactionRankingPodiumThird"
+        app:layout_constraintStart_toStartOf="@+id/reportTransactionRankingPodiumThird"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/food" />

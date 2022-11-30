@@ -26,17 +26,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReportTransactionOfTheMonthFragment extends Fragment {
+public class ReportTransactionRankingFragment extends Fragment {
     ViewReportActivity viewReportActivity;
 
-    public ReportTransactionOfTheMonthFragment(ViewReportActivity viewReportActivityParam) {
+    public ReportTransactionRankingFragment(ViewReportActivity viewReportActivityParam) {
         this.viewReportActivity = viewReportActivityParam;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View viewInflate = inflater.inflate(R.layout.fragment_report_transaction_of_the_month, container, false);
+        View viewInflate = inflater.inflate(R.layout.fragment_report_transaction_ranking, container, false);
 
         Map<String, List<Transaction>> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth())
                 .collect(Collectors.groupingBy(x -> x.TransactionType));
@@ -57,30 +57,30 @@ public class ReportTransactionOfTheMonthFragment extends Fragment {
 
         ImageView[] imageViewPodiumList = new ImageView[]
         {
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumFirst),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumSecond),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthPodiumThird)
+                viewInflate.findViewById(R.id.reportTransactionRankingPodiumFirst),
+                viewInflate.findViewById(R.id.reportTransactionRankingPodiumSecond),
+                viewInflate.findViewById(R.id.reportTransactionRankingPodiumThird)
         };
 
         TextView[] lblRankList = new TextView[]
         {
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblFirst),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblSecond),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblThird)
+                viewInflate.findViewById(R.id.reportTransactionRankingLblFirst),
+                viewInflate.findViewById(R.id.reportTransactionRankingLblSecond),
+                viewInflate.findViewById(R.id.reportTransactionRankingLblThird)
         };
 
         TextView[] lblValueList = new TextView[]
         {
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblFirstValue),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblSecondValue),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthLblThirdValue)
+                viewInflate.findViewById(R.id.reportTransactionRankingLblFirstValue),
+                viewInflate.findViewById(R.id.reportTransactionRankingLblSecondValue),
+                viewInflate.findViewById(R.id.reportTransactionRankingLblThirdValue)
         };
 
         ImageView[] imageViewTransactionTypeList = new ImageView[]
         {
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgFirst),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgSecond),
-                viewInflate.findViewById(R.id.reportTransactionOfTheMonthImgThird)
+                viewInflate.findViewById(R.id.reportTransactionRankingImgFirst),
+                viewInflate.findViewById(R.id.reportTransactionRankingImgSecond),
+                viewInflate.findViewById(R.id.reportTransactionRankingImgThird)
         };
 
         for (int i = imageViewTransactionTypeList.length - 1; i >= 0; i--) {
