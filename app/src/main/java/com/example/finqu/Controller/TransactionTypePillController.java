@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class TransactionTypePillController {
    private ReportSummaryFragment reportSummaryFragment;
    private View viewInflate;
-   private String transactionType;
 
+   public String transactionType;
    public boolean isSelected = false;
 
    private CardView cardViewTransactionType;
@@ -44,6 +44,7 @@ public class TransactionTypePillController {
          public void onClick(View view) {
             isSelected = !isSelected;
 
+            changeColorState();
             changeSelectedState();
 
             reportSummaryFragment.LoadData();
@@ -58,22 +59,38 @@ public class TransactionTypePillController {
       cardViewTransactionType.performClick();
    }
 
-   private void changeSelectedState() {
+   private void changeColorState() {
       if(isSelected) {
          cardViewTransactionType.setCardBackgroundColor(reportSummaryFragment.getResources().getColor(R.color.master_card_2, reportSummaryFragment.getContext().getTheme()));
          lblTransactionType.setTextColor(reportSummaryFragment.getResources().getColor(R.color.white, reportSummaryFragment.getContext().getTheme()));
+      } else {
+         cardViewTransactionType.setCardBackgroundColor(reportSummaryFragment.getResources().getColor(R.color.white, reportSummaryFragment.getContext().getTheme()));
+         lblTransactionType.setTextColor(reportSummaryFragment.getResources().getColor(R.color.black, reportSummaryFragment.getContext().getTheme()));
+      }
+   }
 
+   private void changeSelectedState() {
+      if(isSelected) {
          if(transactionType.equals("All")) {
             reportSummaryFragment.selectedTransactionTypeList = reportSummaryFragment.shownTransactionTypeList.stream().filter(x -> !x.equals("All")).collect(Collectors.toList());
+
+            reportSummaryFragment.transactionTypePillList.stream().filter(x -> !x.transactionType.equals("All")).forEach(x ->
+            {
+               x.isSelected = true;
+               x.changeColorState();
+            });
          } else {
             reportSummaryFragment.selectedTransactionTypeList.add(transactionType);
          }
       } else {
-         cardViewTransactionType.setCardBackgroundColor(reportSummaryFragment.getResources().getColor(R.color.white, reportSummaryFragment.getContext().getTheme()));
-         lblTransactionType.setTextColor(reportSummaryFragment.getResources().getColor(R.color.black, reportSummaryFragment.getContext().getTheme()));
-
          if(transactionType.equals("All")) {
             reportSummaryFragment.selectedTransactionTypeList = new ArrayList<>();
+
+            reportSummaryFragment.transactionTypePillList.stream().filter(x -> !x.transactionType.equals("All")).forEach(x ->
+            {
+               x.isSelected = false;
+               x.changeColorState();
+            });
          } else {
             reportSummaryFragment.selectedTransactionTypeList.remove(transactionType);
          }
