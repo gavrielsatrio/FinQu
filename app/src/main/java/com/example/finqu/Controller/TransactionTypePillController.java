@@ -42,6 +42,10 @@ public class TransactionTypePillController {
       cardViewTransactionType.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+            if(reportSummaryFragment.isLoading) {
+               return;
+            }
+
             isSelected = !isSelected;
 
             changeColorState();

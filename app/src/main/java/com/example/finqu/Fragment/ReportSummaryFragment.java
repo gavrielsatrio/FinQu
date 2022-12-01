@@ -40,7 +40,7 @@ public class ReportSummaryFragment extends Fragment {
     private TextView lblTotalExpense;
     private RecyclerView recViewSummary;
 
-    private boolean isLoading = false;
+    public boolean isLoading = false;
 
     public ReportSummaryFragment(ViewReportActivity viewReportActivityParam) {
         this.viewReportActivity = viewReportActivityParam;

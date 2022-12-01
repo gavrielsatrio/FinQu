@@ -84,17 +84,19 @@ public class ReportTransactionRankingFragment extends Fragment {
         };
 
         for (int i = imageViewTransactionTypeList.length - 1; i >= 0; i--) {
-            String transactionType = transactionTypeSum.get(i).TransactionType;
+            if(i <= transactionTypeSum.size() - 1) {
+                String transactionType = transactionTypeSum.get(i).TransactionType;
 
-            imageViewPodiumList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                imageViewPodiumList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
 
-            lblRankList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                lblRankList[i].animate().setStartDelay(100 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
 
-            lblValueList[i].setText(transactionType);
-            lblValueList[i].animate().setStartDelay(200 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                lblValueList[i].setText(transactionType);
+                lblValueList[i].animate().setStartDelay(200 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
 
-            imageViewTransactionTypeList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
-            imageViewTransactionTypeList[i].animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                imageViewTransactionTypeList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
+                imageViewTransactionTypeList[i].animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+            }
         }
 
         return viewInflate;
