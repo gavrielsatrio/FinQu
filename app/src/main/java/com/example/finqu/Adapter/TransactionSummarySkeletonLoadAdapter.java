@@ -1,13 +1,8 @@
 package com.example.finqu.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,23 +26,23 @@ public class TransactionSummarySkeletonLoadAdapter extends RecyclerView.Adapter<
     @NonNull
     @Override
     public TransactionSummarySkeletonLoadAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(viewReportActivity).inflate(R.layout.animation_skeleton_transaction_summary_item_layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(viewReportActivity).inflate(R.layout.skeleton_item_layout_transaction_summary, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull TransactionSummarySkeletonLoadAdapter.ViewHolder holder, int position) {
         View viewInflate = holder.itemView;
 
-        ImageView shimmerImgLeft = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerTransactionTypeLeft);
-        ImageView shimmerImgRight = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerTransactionTypeRight);
-        ImageView shimmerNameLeft = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerNameLeft);
-        ImageView shimmerNameRight = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerNameRight);
-        ImageView shimmerAmountLeft = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerAmountLeft);
-        ImageView shimmerAmountRight = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonShimmerAmountRight);
+        ImageView shimmerImgLeft = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerTransactionTypeLeft);
+        ImageView shimmerImgRight = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerTransactionTypeRight);
+        ImageView shimmerNameLeft = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerNameLeft);
+        ImageView shimmerNameRight = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerNameRight);
+        ImageView shimmerAmountLeft = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerAmountLeft);
+        ImageView shimmerAmountRight = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonShimmerAmountRight);
 
-        CardView imgTransactionType = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemSkeletonTransactionTypeContainer);
-        TextView lblName = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemLblName);
-        TextView lblAmount = viewInflate.findViewById(R.id.skeletonTransactionSummaryItemLblAmount);
+        CardView imgTransactionType = viewInflate.findViewById(R.id.skeletonTransactionSummarySkeletonTransactionTypeContainer);
+        TextView lblName = viewInflate.findViewById(R.id.skeletonTransactionSummaryLblName);
+        TextView lblAmount = viewInflate.findViewById(R.id.skeletonTransactionSummaryLblAmount);
 
         SkeletonLoadingHelper.StartSkeletonLoadingAnimation(imgTransactionType, shimmerImgLeft, shimmerImgRight, 1200);
         SkeletonLoadingHelper.StartSkeletonLoadingAnimation(lblName, shimmerNameLeft, shimmerNameRight, 1200);

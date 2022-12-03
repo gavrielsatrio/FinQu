@@ -52,7 +52,7 @@
                 android:layout_marginStart="24dp"
                 android:fontFamily="@font/sf_pro_display_light"
                 android:text="Enter your access code :"
-                android:textColor="@color/gray"
+                android:textColor="@color/darkgray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/loginConstLayoutTxtCode"
                 app:layout_constraintStart_toStartOf="parent"

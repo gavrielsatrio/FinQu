@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/skeletonTransactionSummaryItemCardView"
+        android:id="@+id/skeletonTransactionSummaryCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/skeletonTransactionSummaryItemConstLayoutInfo"
+            android:id="@+id/skeletonTransactionSummaryConstLayoutInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/skeletonTransactionSummaryItemImgTransactionType"
+                android:id="@+id/skeletonTransactionSummaryImgTransactionType"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
@@ -46,7 +46,7 @@
                 app:srcCompat="@drawable/finqu" />
 
             <TextView
-                android:id="@+id/skeletonTransactionSummaryItemLblName"
+                android:id="@+id/skeletonTransactionSummaryLblName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -58,12 +58,12 @@
                 android:textSize="14sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/skeletonTransactionSummaryItemLblAmount"
-                app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummaryItemImgTransactionType"
+                app:layout_constraintEnd_toStartOf="@+id/skeletonTransactionSummaryLblAmount"
+                app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummaryImgTransactionType"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/skeletonTransactionSummaryItemLblAmount"
+                android:id="@+id/skeletonTransactionSummaryLblAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -79,24 +79,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/skeletonTransactionSummaryItemSkeletonTransactionTypeContainer"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/skeletonTransactionSummarySkeletonTransactionTypeContainer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/midlightgray"
                 app:cardCornerRadius="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/skeletonTransactionSummaryItemImgTransactionType"
-                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryItemImgTransactionType"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toBottomOf="@+id/skeletonTransactionSummaryImgTransactionType"
+                app:layout_constraintEnd_toEndOf="@+id/skeletonTransactionSummaryImgTransactionType"
+                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryImgTransactionType"
+                app:layout_constraintTop_toTopOf="@+id/skeletonTransactionSummaryImgTransactionType">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerTransactionTypeLeft"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerTransactionTypeLeft"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="-40dp"
@@ -109,13 +111,13 @@
                         app:srcCompat="@drawable/gradient_background_none_to_white" />
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerTransactionTypeRight"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerTransactionTypeRight"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:padding="0dp"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummaryItemSkeletonShimmerTransactionTypeLeft"
+                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummarySkeletonShimmerTransactionTypeLeft"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/gradient_background_white_to_none" />
@@ -125,22 +127,22 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/skeletonTransactionSummaryItemSkeletonNameContainer"
+                android:id="@+id/skeletonTransactionSummarySkeletonNameContainer"
                 android:layout_width="0dp"
                 android:layout_height="14sp"
                 app:cardBackgroundColor="@color/midlightgray"
                 app:cardCornerRadius="7sp"
-                app:layout_constraintBottom_toBottomOf="@+id/skeletonTransactionSummaryItemLblName"
-                app:layout_constraintEnd_toEndOf="@+id/skeletonTransactionSummaryItemLblName"
-                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryItemLblName"
-                app:layout_constraintTop_toTopOf="@+id/skeletonTransactionSummaryItemLblName">
+                app:layout_constraintBottom_toBottomOf="@+id/skeletonTransactionSummaryLblName"
+                app:layout_constraintEnd_toEndOf="@+id/skeletonTransactionSummaryLblName"
+                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryLblName"
+                app:layout_constraintTop_toTopOf="@+id/skeletonTransactionSummaryLblName">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerNameLeft"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerNameLeft"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="-40dp"
@@ -153,13 +155,13 @@
                         app:srcCompat="@drawable/gradient_background_none_to_white" />
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerNameRight"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerNameRight"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:padding="0dp"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummaryItemSkeletonShimmerNameLeft"
+                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummarySkeletonShimmerNameLeft"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/gradient_background_white_to_none" />
@@ -168,23 +170,23 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/skeletonTransactionSummaryItemSkeletonAmountContainer"
+                android:id="@+id/skeletonTransactionSummarySkeletonAmountContainer"
                 android:layout_width="0dp"
                 android:layout_height="20sp"
                 android:layout_marginEnd="8dp"
                 app:cardBackgroundColor="@color/midlightgray"
                 app:cardCornerRadius="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/skeletonTransactionSummaryItemLblAmount"
+                app:layout_constraintBottom_toBottomOf="@+id/skeletonTransactionSummaryLblAmount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryItemLblAmount"
-                app:layout_constraintTop_toTopOf="@+id/skeletonTransactionSummaryItemLblAmount">
+                app:layout_constraintStart_toStartOf="@+id/skeletonTransactionSummaryLblAmount"
+                app:layout_constraintTop_toTopOf="@+id/skeletonTransactionSummaryLblAmount">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerAmountLeft"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerAmountLeft"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="-40dp"
@@ -197,13 +199,13 @@
                         app:srcCompat="@drawable/gradient_background_none_to_white" />
 
                     <ImageView
-                        android:id="@+id/skeletonTransactionSummaryItemSkeletonShimmerAmountRight"
+                        android:id="@+id/skeletonTransactionSummarySkeletonShimmerAmountRight"
                         android:layout_width="20dp"
                         android:layout_height="0dp"
                         android:padding="0dp"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummaryItemSkeletonShimmerAmountLeft"
+                        app:layout_constraintStart_toEndOf="@+id/skeletonTransactionSummarySkeletonShimmerAmountLeft"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/gradient_background_white_to_none" />

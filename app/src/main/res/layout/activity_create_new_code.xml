@@ -53,7 +53,7 @@
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/sf_pro_display_light"
                 android:text="It seems like you are new here, please create a new access code first!"
-                android:textColor="@color/gray"
+                android:textColor="@color/darkgray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/createNewCodeConstLayoutTxtCode"
                 app:layout_constraintEnd_toEndOf="parent"

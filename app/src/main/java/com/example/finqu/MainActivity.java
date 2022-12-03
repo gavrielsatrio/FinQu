@@ -1,19 +1,24 @@
 package com.example.finqu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.finqu.Controller.TransactionItemController;
+import com.example.finqu.Adapter.TransactionSkeletonLoadAdapter;
+import com.example.finqu.Controller.TransactionController;
 import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
@@ -37,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
     EditText txtEndDate;
     ImageView btnSetting;
     FloatingActionButton btnRefresh;
+    RecyclerView recViewSkeleton;
 
     private String dateState = "start";
-    private boolean isFetchingNewData = false;
+    public boolean isFetchingNewData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         txtEndDate = findViewById(R.id.mainTxtEndDate);
         btnSetting = findViewById(R.id.mainBtnSetting);
         btnRefresh = findViewById(R.id.mainBtnRefresh);
+        recViewSkeleton = findViewById(R.id.mainRecViewSkeleton);
 
         txtStartDate.setKeyListener(null);
         txtEndDate.setKeyListener(null);
@@ -64,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         txtEndDate.setText(DateHelper.convertToShortStringFromDate(calendar.getTime()));
 
         LoadTransactionList();
-        LoadTodayExpenses();
 
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -148,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     String currentDateOnList = "";
     Integer totalTodayExpense = 0;
+    Integer totalSelectedRangeExpense = 0;
 
     private void RefreshData() {
         if(!isFetchingNewData) {
@@ -167,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                             loadingDialog.DismissDialog();
 
                             LoadTransactionList();
-                            LoadTodayExpenses();
                         }
                     });
                 }
@@ -176,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void LoadTransactionList() {
+        totalSelectedRangeExpense = 0;
+        totalTodayExpense = 0;
         currentDateOnList = "";
 
         linearLayoutTransaction.removeAllViews();
@@ -183,55 +191,104 @@ public class MainActivity extends AppCompatActivity {
         Date startDate = DateHelper.convertToDateFromShortString(txtStartDate.getText().toString());
         Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
 
-        List<Transaction> query = GlobalData.transactionList.stream().filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate)).collect(Collectors.toList());
-        query.forEach(x ->
-        {
-            if(!currentDateOnList.equals(DateHelper.convertToStringFromDate(x.Date))) {
-                currentDateOnList = DateHelper.convertToStringFromDate(x.Date);
+        linearLayoutTransaction.setVisibility(View.INVISIBLE);
+        recViewSkeleton.setVisibility(View.VISIBLE);
 
-                View transactionDateView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_transaction_date, null, false);
+        recViewSkeleton.setLayoutManager(new GridLayoutManager(MainActivity.this, 1, RecyclerView.VERTICAL, false));
+        recViewSkeleton.setAdapter(new TransactionSkeletonLoadAdapter(MainActivity.this, 5));
 
-                if(x.Date.equals(query.get(0).Date)) {
-                    FloatingActionButton btnRefreshOnItemDate = transactionDateView.findViewById(R.id.transactionDateBtnRefresh);
-                    btnRefreshOnItemDate.setVisibility(View.VISIBLE);
-                    btnRefreshOnItemDate.setOnClickListener(new View.OnClickListener() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Transaction> query = GlobalData.transactionList.stream().filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate)).collect(Collectors.toList());
+                query.forEach(x ->
+                {
+                    if(!currentDateOnList.equals(DateHelper.convertToStringFromDate(x.Date))) {
+                        currentDateOnList = DateHelper.convertToStringFromDate(x.Date);
+
+                        View transactionDateView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_transaction_date, null, false);
+
+                        if(x.Date.equals(query.get(0).Date)) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    FloatingActionButton btnRefreshOnItemDate = transactionDateView.findViewById(R.id.transactionDateBtnRefresh);
+                                    btnRefreshOnItemDate.setVisibility(View.VISIBLE);
+                                    btnRefreshOnItemDate.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            RefreshData();
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((TextView)transactionDateView.findViewById(R.id.transactionDateLbl)).setText(currentDateOnList);
+                                linearLayoutTransaction.addView(transactionDateView);
+                            }
+                        });
+                    }
+
+                    int calculatedAmount = x.IsOut ? x.Amount : x.Amount * -1;
+
+                    totalSelectedRangeExpense += calculatedAmount;
+                    if(x.Date.equals(DateHelper.getDateNow())) {
+                        totalTodayExpense += calculatedAmount;
+                    }
+
+                    TransactionController transactionItem = new TransactionController(MainActivity.this, x);
+                    transactionItem.setDataAndEventsToView();
+
+                    runOnUiThread(new Runnable() {
                         @Override
-                        public void onClick(View view) {
-                            RefreshData();
+                        public void run() {
+                            linearLayoutTransaction.addView(transactionItem.getView());
                         }
                     });
-                }
+                });
 
-                ((TextView)transactionDateView.findViewById(R.id.transactionDateLbl)).setText(currentDateOnList);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        lblTodayExpense.setText(NumberHelper.convertToRpFormat(totalTodayExpense));
+                    }
+                });
 
-                linearLayoutTransaction.addView(transactionDateView);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(linearLayoutTransaction.getChildCount() == 0) {
+                            btnRefresh.setVisibility(View.VISIBLE);
+                        } else {
+                            btnRefresh.setVisibility(View.INVISIBLE);
+
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            layoutParams.setMargins(0, 8, 0, 8);
+
+                            TextView lblSelectedRangeExpense = new TextView(MainActivity.this);
+                            lblSelectedRangeExpense.setText("Selected range total expenses : " + NumberHelper.convertToRpFormat(totalSelectedRangeExpense));
+                            lblSelectedRangeExpense.setLayoutParams(layoutParams);
+                            lblSelectedRangeExpense.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                            lblSelectedRangeExpense.setTypeface(MainActivity.this.getResources().getFont(R.font.sf_pro_display_medium));
+
+                            linearLayoutTransaction.addView(lblSelectedRangeExpense);
+                        }
+                    }
+                });
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        linearLayoutTransaction.setVisibility(View.VISIBLE);
+                        recViewSkeleton.setAdapter(null);
+                        recViewSkeleton.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
-
-            TransactionItemController itemLayout = new TransactionItemController(MainActivity.this, x);
-            itemLayout.setDataAndEventsToView();
-
-            linearLayoutTransaction.addView(itemLayout.getView());
-        });
-
-        if(linearLayoutTransaction.getChildCount() == 0) {
-            btnRefresh.setVisibility(View.VISIBLE);
-        } else {
-            btnRefresh.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void LoadTodayExpenses() {
-        totalTodayExpense = 0;
-
-        GlobalData.transactionList.stream().filter(x -> x.Date.equals(DateHelper.getDateNow())).forEach(x ->
-        {
-            if(x.IsOut) {
-                totalTodayExpense += x.Amount;
-            } else {
-                totalTodayExpense -= x.Amount;
-            }
-        });
-
-        lblTodayExpense.setText(NumberHelper.convertToRpFormat(totalTodayExpense));
+        }).start();
     }
 }
