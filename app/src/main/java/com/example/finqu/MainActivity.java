@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.finqu.Controller.TransactionItemController;
@@ -27,7 +25,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -192,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
             if(!currentDateOnList.equals(DateHelper.convertToStringFromDate(x.Date))) {
                 currentDateOnList = DateHelper.convertToStringFromDate(x.Date);
 
-                View transactionDateView = LayoutInflater.from(MainActivity.this).inflate(R.layout.transaction_item_date_layout, null, false);
+                View transactionDateView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_transaction_date, null, false);
 
                 if(x.Date.equals(query.get(0).Date)) {
-                    FloatingActionButton btnRefreshOnItemDate = transactionDateView.findViewById(R.id.transactionItemDateBtnRefresh);
+                    FloatingActionButton btnRefreshOnItemDate = transactionDateView.findViewById(R.id.transactionDateBtnRefresh);
                     btnRefreshOnItemDate.setVisibility(View.VISIBLE);
                     btnRefreshOnItemDate.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -205,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
 
-                ((TextView)transactionDateView.findViewById(R.id.transactionItemDateLbl)).setText(currentDateOnList);
+                ((TextView)transactionDateView.findViewById(R.id.transactionDateLbl)).setText(currentDateOnList);
 
                 linearLayoutTransaction.addView(transactionDateView);
             }

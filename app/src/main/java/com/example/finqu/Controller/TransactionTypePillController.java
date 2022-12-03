@@ -1,13 +1,10 @@
 package com.example.finqu.Controller;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.finqu.Data.GlobalData;
-import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Fragment.ReportSummaryFragment;
 import com.example.finqu.Helper.TransactionTypeHelper;
 import com.example.finqu.R;
@@ -30,12 +27,12 @@ public class TransactionTypePillController {
 
    public TransactionTypePillController(ReportSummaryFragment reportSummaryFragmentParam, String transactionTypeParam) {
       this.reportSummaryFragment = reportSummaryFragmentParam;
-      this.viewInflate = LayoutInflater.from(reportSummaryFragment.getContext()).inflate(R.layout.transaction_type_item_pill_layout, null, false);
+      this.viewInflate = LayoutInflater.from(reportSummaryFragment.getContext()).inflate(R.layout.item_layout_transaction_type_pill, null, false);
       this.transactionType = transactionTypeParam;
 
-      this.cardViewTransactionType = viewInflate.findViewById(R.id.transactionTypeItemPillCardView);
-      this.imgTransactionType = viewInflate.findViewById(R.id.transactionTypeItemPillImg);
-      this.lblTransactionType = viewInflate.findViewById(R.id.transactionTypeItemPillLblName);
+      this.cardViewTransactionType = viewInflate.findViewById(R.id.transactionTypePillCardView);
+      this.imgTransactionType = viewInflate.findViewById(R.id.transactionTypePillImg);
+      this.lblTransactionType = viewInflate.findViewById(R.id.transactionTypePillLblName);
    }
 
    public void setDataAndEventsToView() {

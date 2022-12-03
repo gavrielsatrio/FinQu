@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactionSummaryItemCardView"
+        android:id="@+id/transactionSummaryCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/transactionSummaryItemConstLayoutInfo"
+            android:id="@+id/transactionSummaryConstLayoutInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/transactionSummaryItemLblName"
+                android:id="@+id/transactionSummaryLblName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -41,12 +41,12 @@
                 android:text="Nasi Goreng"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/transactionSummaryItemLblAmount"
-                app:layout_constraintStart_toEndOf="@+id/transactionSummaryItemImgTransactionType"
+                app:layout_constraintEnd_toStartOf="@+id/transactionSummaryLblAmount"
+                app:layout_constraintStart_toEndOf="@+id/transactionSummaryImgTransactionType"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/transactionSummaryItemLblAmount"
+                android:id="@+id/transactionSummaryLblAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/transactionSummaryItemImgTransactionType"
+                android:id="@+id/transactionSummaryImgTransactionType"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"

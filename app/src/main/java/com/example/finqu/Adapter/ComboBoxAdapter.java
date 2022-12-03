@@ -37,7 +37,7 @@ public class ComboBoxAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View viewInflate = LayoutInflater.from(context).inflate(R.layout.combo_box_item_layout, null, false);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.item_layout_combo_box, null, false);
 
         ((TextView)viewInflate.findViewById(R.id.comboBoxLbl)).setText(items.get(i));
 

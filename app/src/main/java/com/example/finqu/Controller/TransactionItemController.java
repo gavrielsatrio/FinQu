@@ -37,16 +37,16 @@ public class TransactionItemController {
     public TransactionItemController(Context contextParam, Transaction transactionParam) {
         this.context = contextParam;
         this.currentTransaction = transactionParam;
-        this.viewInflate = LayoutInflater.from(contextParam).inflate(R.layout.transaction_item_layout, null, false);
+        this.viewInflate = LayoutInflater.from(contextParam).inflate(R.layout.item_layout_transaction, null, false);
 
-        this.lblName = viewInflate.findViewById(R.id.transactionItemLblName);
-        this.lblPaymentType = viewInflate.findViewById(R.id.transactionItemLblPaymentType);
-        this.imgTransactionType = viewInflate.findViewById(R.id.transactionItemImgTransactionType);
-        this.lblAmount = viewInflate.findViewById(R.id.transactionItemLblAmount);
-        this.constLayoutInfo = viewInflate.findViewById(R.id.transactionItemConstLayoutInfo);
-        this.btnEdit = viewInflate.findViewById(R.id.transactionItemBtnEdit);
-        this.btnDelete = viewInflate.findViewById(R.id.transactionItemBtnDelete);
-        this.btnDetail = viewInflate.findViewById(R.id.transactionItemBtnDetail);
+        this.lblName = viewInflate.findViewById(R.id.transactionLblName);
+        this.lblPaymentType = viewInflate.findViewById(R.id.transactionLblPaymentType);
+        this.imgTransactionType = viewInflate.findViewById(R.id.transactionImgTransactionType);
+        this.lblAmount = viewInflate.findViewById(R.id.transactionLblAmount);
+        this.constLayoutInfo = viewInflate.findViewById(R.id.transactionConstLayoutInfo);
+        this.btnEdit = viewInflate.findViewById(R.id.transactionBtnEdit);
+        this.btnDelete = viewInflate.findViewById(R.id.transactionBtnDelete);
+        this.btnDetail = viewInflate.findViewById(R.id.transactionBtnDetail);
     }
 
     public void setDataAndEventsToView() {
@@ -98,15 +98,15 @@ public class TransactionItemController {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                View viewDialog = LayoutInflater.from(context).inflate(R.layout.transaction_item_detail_layout, null, false);
+                View viewDialog = LayoutInflater.from(context).inflate(R.layout.dialog_layout_transaction_detail, null, false);
                 builder.setView(viewDialog);
 
-                ((TextView)viewDialog.findViewById(R.id.transactionItemDetailLblName)).setText(currentTransaction.Name);
-                ((TextView)viewDialog.findViewById(R.id.transactionItemDetailLblPaidBy)).setText("Paid By : " + currentTransaction.PaidBy);
-                ((ImageView)viewDialog.findViewById(R.id.transactionItemDetailImgPaymentType)).setImageDrawable(PaymentTypeHelper.getInstance(context).getPaymentIcon(currentTransaction.PaymentType));
+                ((TextView)viewDialog.findViewById(R.id.transactionDetailLblName)).setText(currentTransaction.Name);
+                ((TextView)viewDialog.findViewById(R.id.transactionDetailLblPaidBy)).setText("Paid By : " + currentTransaction.PaidBy);
+                ((ImageView)viewDialog.findViewById(R.id.transactionDetailImgPaymentType)).setImageDrawable(PaymentTypeHelper.getInstance(context).getPaymentIcon(currentTransaction.PaymentType));
 
-                CardView cardViewStatus = viewDialog.findViewById(R.id.transactionItemDetailCardViewStatus);
-                ImageView imgStatus = viewDialog.findViewById(R.id.transactionItemDetailImgStatus);
+                CardView cardViewStatus = viewDialog.findViewById(R.id.transactionDetailCardViewStatus);
+                ImageView imgStatus = viewDialog.findViewById(R.id.transactionDetailImgStatus);
                 if(currentTransaction.IsCheck) {
                     cardViewStatus.setCardBackgroundColor(context.getResources().getColor(R.color.green_type_in, context.getTheme()));
                     imgStatus.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_round_check_24, context.getTheme()));
@@ -116,7 +116,7 @@ public class TransactionItemController {
                 }
 
 
-                TextView lblAmount = viewDialog.findViewById(R.id.transactionItemDetailLblAmount);
+                TextView lblAmount = viewDialog.findViewById(R.id.transactionDetailLblAmount);
                 Integer amountView = currentTransaction.Amount;
                 if(currentTransaction.IsIn) {
                     lblAmount.setTextColor(context.getResources().getColor(R.color.green_type_in, context.getTheme()));

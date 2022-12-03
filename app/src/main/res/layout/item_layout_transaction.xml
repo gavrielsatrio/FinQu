@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactionItemCardView"
+        android:id="@+id/transactionCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -25,15 +25,15 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/transactionItemConstLayoutActions"
+                android:id="@+id/transactionConstLayoutActions"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/transactionItemConstLayoutInfo"
+                app:layout_constraintBottom_toBottomOf="@+id/transactionConstLayoutInfo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/transactionItemConstLayoutInfo">
+                app:layout_constraintTop_toTopOf="@+id/transactionConstLayoutInfo">
 
                 <Button
-                    android:id="@+id/transactionItemBtnDelete"
+                    android:id="@+id/transactionBtnDelete"
                     android:layout_width="160px"
                     android:layout_height="0dp"
                     android:background="@android:color/holo_red_light"
@@ -43,11 +43,11 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/transactionItemBtnEdit"
+                    app:layout_constraintStart_toEndOf="@+id/transactionBtnEdit"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/transactionItemBtnEdit"
+                    android:id="@+id/transactionBtnEdit"
                     android:layout_width="160px"
                     android:layout_height="0dp"
                     android:background="@android:color/holo_orange_light"
@@ -55,14 +55,14 @@
                     android:textColor="@android:color/holo_orange_dark"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/transactionItemBtnDelete"
+                    app:layout_constraintEnd_toStartOf="@+id/transactionBtnDelete"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/transactionItemBtnDetail"
+                    android:id="@+id/transactionBtnDetail"
                     android:layout_width="160px"
                     android:layout_height="0dp"
                     android:background="@color/master_card_1"
@@ -76,7 +76,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/transactionItemConstLayoutInfo"
+                android:id="@+id/transactionConstLayoutInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -86,7 +86,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/transactionItemLblName"
+                    android:id="@+id/transactionLblName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -95,12 +95,12 @@
                     android:fontFamily="@font/sf_pro_display_regular"
                     android:text="Nasi Goreng"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/transactionItemLblAmount"
-                    app:layout_constraintStart_toEndOf="@+id/transactionItemImgTransactionType"
+                    app:layout_constraintEnd_toStartOf="@+id/transactionLblAmount"
+                    app:layout_constraintStart_toEndOf="@+id/transactionImgTransactionType"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/transactionItemLblAmount"
+                    android:id="@+id/transactionLblAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -115,7 +115,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/transactionItemLblPaymentType"
+                    android:id="@+id/transactionLblPaymentType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -125,11 +125,11 @@
                     android:textColor="@color/darkgray"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/transactionItemImgTransactionType"
-                    app:layout_constraintTop_toBottomOf="@+id/transactionItemLblName" />
+                    app:layout_constraintStart_toEndOf="@+id/transactionImgTransactionType"
+                    app:layout_constraintTop_toBottomOf="@+id/transactionLblName" />
 
                 <ImageView
-                    android:id="@+id/transactionItemImgTransactionType"
+                    android:id="@+id/transactionImgTransactionType"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="8dp"

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ProgressBar
-        android:id="@+id/dialogLoadingProgressBar"
+        android:id="@+id/loadingProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -20,15 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialogLoadingLblDesc"
+        android:id="@+id/loadingLblDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/sf_pro_display_regular"
         android:text="Loading..."
-        app:layout_constraintBottom_toBottomOf="@+id/dialogLoadingProgressBar"
+        app:layout_constraintBottom_toBottomOf="@+id/loadingProgressBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dialogLoadingProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/dialogLoadingProgressBar" />
+        app:layout_constraintStart_toEndOf="@+id/loadingProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/loadingProgressBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

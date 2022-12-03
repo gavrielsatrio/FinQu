@@ -29,7 +29,7 @@ public class TransactionSummaryAdapter extends RecyclerView.Adapter<TransactionS
     @NonNull
     @Override
     public TransactionSummaryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(viewReportActivity).inflate(R.layout.transaction_summary_item_layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(viewReportActivity).inflate(R.layout.item_layout_transaction_summary, parent, false));
     }
 
     @Override
@@ -38,9 +38,9 @@ public class TransactionSummaryAdapter extends RecyclerView.Adapter<TransactionS
 
         TransactionTypeSummary transactionTypeSummaryItem = transactionTypeSummaryList.get(position);
 
-        ((TextView)viewInflate.findViewById(R.id.transactionSummaryItemLblName)).setText(transactionTypeSummaryItem.TransactionType);
-        ((TextView)viewInflate.findViewById(R.id.transactionSummaryItemLblAmount)).setText(NumberHelper.convertToRpFormat(transactionTypeSummaryItem.SumAmount));
-        ((ImageView)viewInflate.findViewById(R.id.transactionSummaryItemImgTransactionType)).setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionTypeSummaryItem.TransactionType));;
+        ((TextView)viewInflate.findViewById(R.id.transactionSummaryLblName)).setText(transactionTypeSummaryItem.TransactionType);
+        ((TextView)viewInflate.findViewById(R.id.transactionSummaryLblAmount)).setText(NumberHelper.convertToRpFormat(transactionTypeSummaryItem.SumAmount));
+        ((ImageView)viewInflate.findViewById(R.id.transactionSummaryImgTransactionType)).setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionTypeSummaryItem.TransactionType));;
     }
 
     @Override

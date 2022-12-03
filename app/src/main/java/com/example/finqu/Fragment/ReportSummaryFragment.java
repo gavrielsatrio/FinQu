@@ -1,7 +1,6 @@
 package com.example.finqu.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import com.example.finqu.Adapter.TransactionSummaryAdapter;
 import com.example.finqu.Adapter.TransactionSummarySkeletonLoadAdapter;
 import com.example.finqu.Controller.TransactionTypePillController;
 import com.example.finqu.Data.GlobalData;
-import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
@@ -67,7 +65,7 @@ public class ReportSummaryFragment extends Fragment {
         int totalTransactionTypeRow = (transactionTypeCount / perRowTransactionTypePillCount) + 1;
         int transactionTypeIndex = 0;
         for (int i = 0; i < totalTransactionTypeRow; i++) {
-            View viewTransactionTypeContainer = LayoutInflater.from(viewReportActivity).inflate(R.layout.transaction_type_item_container_layout, null, false);
+            View viewTransactionTypeContainer = LayoutInflater.from(viewReportActivity).inflate(R.layout.container_layout_transaction_type_item, null, false);
             LinearLayout transactionTypeItemContainer = viewTransactionTypeContainer.findViewById(R.id.transactionTypeItemContainer);
 
             int j = 0;
@@ -97,8 +95,7 @@ public class ReportSummaryFragment extends Fragment {
 
     private int totalExpenses = 0;
     public void LoadData() {
-        if(isLoading)
-        {
+        if(isLoading) {
             return;
         }
 

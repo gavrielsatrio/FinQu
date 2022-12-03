@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/transactionItemDateBtnRefresh"
+        android:id="@+id/transactionDateBtnRefresh"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:clickable="true"
@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/ic_baseline_refresh_24" />
 
     <TextView
-        android:id="@+id/transactionItemDateLbl"
+        android:id="@+id/transactionDateLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

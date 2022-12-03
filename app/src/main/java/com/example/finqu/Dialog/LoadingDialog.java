@@ -20,13 +20,13 @@ public class LoadingDialog {
     public void ShowDialog(String descText) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        View viewDialog = LayoutInflater.from(context).inflate(R.layout.dialog_loading_layout, null, false);
+        View viewDialog = LayoutInflater.from(context).inflate(R.layout.dialog_layout_loading, null, false);
         builder.setView(viewDialog);
         builder.setCancelable(false);
 
         dialog = builder.create();
 
-        ((TextView)viewDialog.findViewById(R.id.dialogLoadingLblDesc)).setText(descText);
+        ((TextView)viewDialog.findViewById(R.id.loadingLblDesc)).setText(descText);
 
         dialog.show();
     }
