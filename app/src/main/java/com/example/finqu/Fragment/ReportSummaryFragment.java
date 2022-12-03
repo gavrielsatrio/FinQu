@@ -15,6 +15,7 @@ import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
 import com.example.finqu.Model.TransactionTypeSummary;
+import com.example.finqu.ModifiedClass.ModifiedFragment;
 import com.example.finqu.R;
 import com.example.finqu.ViewReportActivity;
 
@@ -28,7 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ReportSummaryFragment extends Fragment {
+public class ReportSummaryFragment extends ModifiedFragment {
     private ViewReportActivity viewReportActivity;
 
     public List<String> shownTransactionTypeList = GlobalData.transactionTypeList.stream().filter(x -> !x.equals("Income") && !x.equals("Bank Transfer")).collect(Collectors.toList());
@@ -37,8 +38,6 @@ public class ReportSummaryFragment extends Fragment {
 
     private TextView lblTotalExpense;
     private RecyclerView recViewSummary;
-
-    public boolean isLoading = false;
 
     public ReportSummaryFragment(ViewReportActivity viewReportActivityParam) {
         this.viewReportActivity = viewReportActivityParam;

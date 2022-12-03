@@ -22,6 +22,7 @@ import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
+import com.example.finqu.ModifiedClass.ModifiedFragment;
 import com.example.finqu.R;
 import com.example.finqu.ViewReportActivity;
 
@@ -31,7 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReportChartFragment extends Fragment {
+public class ReportChartFragment extends ModifiedFragment {
     ViewReportActivity viewReportActivity;
 
     public ReportChartFragment(ViewReportActivity viewReportActivityParam) {

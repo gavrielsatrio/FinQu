@@ -17,6 +17,7 @@ import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.TransactionTypeHelper;
 import com.example.finqu.Model.Transaction;
 import com.example.finqu.Model.TransactionTypeSummary;
+import com.example.finqu.ModifiedClass.ModifiedFragment;
 import com.example.finqu.R;
 import com.example.finqu.ViewReportActivity;
 
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReportTransactionRankingFragment extends Fragment {
+public class ReportTransactionRankingFragment extends ModifiedFragment {
     ViewReportActivity viewReportActivity;
 
     public ReportTransactionRankingFragment(ViewReportActivity viewReportActivityParam) {

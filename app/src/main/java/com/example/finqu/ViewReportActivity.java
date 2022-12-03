@@ -6,12 +6,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finqu.Fragment.ReportChartFragment;
 import com.example.finqu.Fragment.ReportSummaryFragment;
 import com.example.finqu.Fragment.ReportTransactionRankingFragment;
+import com.example.finqu.ModifiedClass.ModifiedFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Hashtable;
@@ -21,7 +23,8 @@ public class ViewReportActivity extends AppCompatActivity {
     ImageView btnBack;
     TabLayout tabLayout;
 
-    Hashtable<String, Fragment> reportFragmentList = new Hashtable<>();
+    Hashtable<String, ModifiedFragment> reportFragmentList = new Hashtable<>();
+    ModifiedFragment previousFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class ViewReportActivity extends AppCompatActivity {
             }
         });
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 LoadReportFragment(tab.getText().toString());
@@ -63,6 +66,7 @@ public class ViewReportActivity extends AppCompatActivity {
     }
 
     private void LoadReportFragment(String reportType) {
+        previousFragment = reportFragmentList.get(reportType);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction trx = fragmentManager.beginTransaction();
         trx.replace(R.id.viewReportFrameLayout, reportFragmentList.get(reportType))
