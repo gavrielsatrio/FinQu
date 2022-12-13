@@ -18,6 +18,7 @@ public class PaymentTypeHelper {
 
         paymentTypeList.put("BCA Mobile", this.context.getResources().getDrawable(R.drawable.bca_mobile, this.context.getTheme()));
         paymentTypeList.put("Cash", this.context.getResources().getDrawable(R.drawable.cash, this.context.getTheme()));
+        paymentTypeList.put("Dana", this.context.getResources().getDrawable(R.drawable.dana, this.context.getTheme()));
         paymentTypeList.put("Debit BCA", this.context.getResources().getDrawable(R.drawable.debit_bca, this.context.getTheme()));
         paymentTypeList.put("Flazz", this.context.getResources().getDrawable(R.drawable.flazz, this.context.getTheme()));
         paymentTypeList.put("GoPay", this.context.getResources().getDrawable(R.drawable.gopay, this.context.getTheme()));
