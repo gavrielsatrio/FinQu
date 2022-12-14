@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,11 +98,42 @@ public class ReportTransactionRankingFragment extends ModifiedFragment {
                 lblValueList[i].setText(transactionType);
                 lblValueList[i].animate().setStartDelay(200 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
 
-                imageViewTransactionTypeList[i].setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
-                imageViewTransactionTypeList[i].animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator());
+                ImageView imgTransactionType = imageViewTransactionTypeList[i];
+
+                imgTransactionType.setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
+                imgTransactionType.animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        AnimateBouncingImage(imgTransactionType);
+                    }
+                });
             }
         }
 
         return viewInflate;
+    }
+
+    private void AnimateBouncingImage(ImageView img) {
+        img.animate().setStartDelay(0).rotationY(360).translationY(-32).setDuration(300).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                img.animate().setStartDelay(0).rotationY(0).translationY(-32).setDuration(250).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        img.animate().setStartDelay(0).rotationY(0).translationY(0).setDuration(800).setInterpolator(new BounceInterpolator()).withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                img.animate().setStartDelay(0).rotationY(0).translationY(0).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AnimateBouncingImage(img);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 }
