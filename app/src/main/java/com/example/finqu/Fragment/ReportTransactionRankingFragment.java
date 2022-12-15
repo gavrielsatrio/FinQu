@@ -1,6 +1,7 @@
 package com.example.finqu.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,13 @@ public class ReportTransactionRankingFragment extends ModifiedFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewInflate = inflater.inflate(R.layout.fragment_report_transaction_ranking, container, false);
 
-        Map<String, List<Transaction>> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth())
+        Map<String, List<Transaction>> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && !x.TransactionType.equals("Income") && !x.TransactionType.equals("Bank Transfer"))
                 .collect(Collectors.groupingBy(x -> x.TransactionType));
 
         List<TransactionTypeSummary> transactionTypeSum = new ArrayList<>();
         transactionList.forEach((key, value) ->
         {
-            Integer sum = value.stream().filter(x -> x.IsOut).collect(Collectors.summingInt(x -> x.Amount));
+            Integer sum = value.stream().collect(Collectors.summingInt(x -> x.IsOut ? x.Amount : x.Amount * -1));
             transactionTypeSum.add(new TransactionTypeSummary(key, sum));
         });
 
