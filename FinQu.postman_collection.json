@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "72638a33-501b-4d0e-bf76-391369fcdc4f",
+		"name": "FinQu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add New Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Date\" : \"12-14-2022\",\r\n    \"TransactionType\" : \"Food\",\r\n    \"Title\" : \"Nasi Uduk BARUBARU\",\r\n    \"IsIn\" : false,\r\n    \"IsOut\" : true,\r\n    \"PaidBy\" : \"Me\",\r\n    \"PaymentType\" : \"Cash\",\r\n    \"IsCheck\" : true,\r\n    \"Amount\" : 15000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://script.google.com/macros/s/AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ/exec?action=addNewDataToSheet&sheetName=Sheet8&rowNo=1&isFirstDataOnTheDay=FALSE",
+					"protocol": "https",
+					"host": [
+						"script",
+						"google",
+						"com"
+					],
+					"path": [
+						"macros",
+						"s",
+						"AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ",
+						"exec"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "addNewDataToSheet"
+						},
+						{
+							"key": "sheetName",
+							"value": "Sheet8"
+						},
+						{
+							"key": "rowNo",
+							"value": "1"
+						},
+						{
+							"key": "isFirstDataOnTheDay",
+							"value": "FALSE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Date\" : \"12-14-2022\",\r\n    \"TransactionType\" : \"Food fdsafdas\",\r\n    \"Title\" : \"Nasi Uduk\",\r\n    \"IsIn\" : false,\r\n    \"IsOut\" : true,\r\n    \"PaidBy\" : \"Me\",\r\n    \"PaymentType\" : \"Cash\",\r\n    \"IsCheck\" : true,\r\n    \"Amount\" : 15000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://script.google.com/macros/s/AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ/exec?action=editDataFromSheetAtRowNo&sheetName=Sheet8&rowNo=10",
+					"protocol": "https",
+					"host": [
+						"script",
+						"google",
+						"com"
+					],
+					"path": [
+						"macros",
+						"s",
+						"AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ",
+						"exec"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "editDataFromSheetAtRowNo"
+						},
+						{
+							"key": "sheetName",
+							"value": "Sheet8"
+						},
+						{
+							"key": "rowNo",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Date\" : \"12-14-2022\",\r\n    \"TransactionType\" : \"Food\",\r\n    \"Title\" : \"Nasi Uduk\",\r\n    \"IsIn\" : false,\r\n    \"IsOut\" : true,\r\n    \"PaidBy\" : \"Me\",\r\n    \"PaymentType\" : \"Cash\",\r\n    \"IsCheck\" : true,\r\n    \"Amount\" : 15000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://script.google.com/macros/s/AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ/exec?action=deleteRowFromSheet&sheetName=Sheet8&rowNo=1",
+					"protocol": "https",
+					"host": [
+						"script",
+						"google",
+						"com"
+					],
+					"path": [
+						"macros",
+						"s",
+						"AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ",
+						"exec"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteRowFromSheet"
+						},
+						{
+							"key": "sheetName",
+							"value": "Sheet8"
+						},
+						{
+							"key": "rowNo",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
