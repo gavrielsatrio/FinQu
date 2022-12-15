@@ -28,6 +28,8 @@ import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -152,6 +154,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RefreshData();
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(linearLayoutTransaction.getChildCount() == 0) {
+
+                } else {
+
+                }
             }
         });
     }

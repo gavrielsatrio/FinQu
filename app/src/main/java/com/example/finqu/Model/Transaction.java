@@ -12,8 +12,9 @@ public class Transaction {
     public String PaymentType;
     public Boolean IsCheck;
     public Integer Amount;
+    public Integer RowNoInExcel;
 
-    public Transaction(Date dateParam, String transactionTypeParam, String nameParam, Boolean isInParam, Boolean isOutParam, String paidByParam, String paymentTypeParam, Boolean isCheckParam, Integer amountParam) {
+    public Transaction(Date dateParam, String transactionTypeParam, String nameParam, Boolean isInParam, Boolean isOutParam, String paidByParam, String paymentTypeParam, Boolean isCheckParam, Integer amountParam, Integer rowNoInExcel) {
         this.Date = dateParam;
         this.TransactionType = transactionTypeParam;
         this.Name = nameParam;
@@ -23,5 +24,6 @@ public class Transaction {
         this.PaymentType = paymentTypeParam;
         this.IsCheck = isCheckParam;
         this.Amount = amountParam;
+        this.RowNoInExcel = rowNoInExcel;
     }
 }
