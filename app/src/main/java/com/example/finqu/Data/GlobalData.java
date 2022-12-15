@@ -80,14 +80,14 @@ public class GlobalData {
 
                     if(!GlobalData.transactionListGroupByDate.containsKey(DateHelper.convertToDateFromString(currentDate))) {
                         ArrayList<Transaction> newDailyTransactionList = new ArrayList<>();
-                        newDailyTransactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount));
+                        newDailyTransactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
 
                         GlobalData.transactionListGroupByDate.put(DateHelper.convertToDateFromString(currentDate), newDailyTransactionList);
                     } else {
-                        GlobalData.transactionListGroupByDate.get(DateHelper.convertToDateFromString(currentDate)).add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount));
+                        GlobalData.transactionListGroupByDate.get(DateHelper.convertToDateFromString(currentDate)).add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
                     }
 
-                    GlobalData.transactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount));
+                    GlobalData.transactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
 
                     currentIndex++;
                 }
