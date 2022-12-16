@@ -23,12 +23,14 @@ public class GlobalData {
     public static List<Transaction> transactionList = new ArrayList<>();
     public static Hashtable<Date, ArrayList<Transaction>> transactionListGroupByDate = new Hashtable<>();
     public static List<String> transactionTypeList = new ArrayList<>();
+    public static List<String> paymentTypeList = new ArrayList<>();
 
     public static void FetchNewData() {
         GlobalData.sheetList = new ArrayList<>();
         GlobalData.transactionList = new ArrayList<>();
         GlobalData.transactionListGroupByDate = new Hashtable<>();
         GlobalData.transactionTypeList = new ArrayList<>();
+        GlobalData.paymentTypeList = new ArrayList<>();
 
         HttpRequest requestSheets = new HttpRequest("https://sheets.googleapis.com/v4/spreadsheets/1_85IA1IJ2PH4Kb-95rfB5Eqa4I1vffdwtq2FaAShB0A/?key=AIzaSyBc2POX2kNNnxaeuB0Az6DZcD6D27aAIUM", "GET");
         requestSheets.setRequestProperty("Content-Type", "application/json");
@@ -46,6 +48,10 @@ public class GlobalData {
             GlobalData.transactionTypeList.add("All");
             for (int i = 1; i < resultMasterDataSheet.length(); i++) {
                 GlobalData.transactionTypeList.add(resultMasterDataSheet.getJSONArray(i).getString(2).trim());
+
+                if(!resultMasterDataSheet.getJSONArray(i).getString(0).trim().equals("")) {
+                    GlobalData.paymentTypeList.add(resultMasterDataSheet.getJSONArray(i).getString(0).trim());
+                }
             }
 
             for (int i = 2; i < sheetJSONArray.length(); i++) {

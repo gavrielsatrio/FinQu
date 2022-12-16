@@ -10,12 +10,13 @@ import android.widget.TextView;
 import com.example.finqu.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComboBoxAdapter extends BaseAdapter {
     Context context;
-    ArrayList<String> items;
+    List<String> items;
 
-    public ComboBoxAdapter(Context contextParam, ArrayList<String> itemsParam) {
+    public ComboBoxAdapter(Context contextParam, List<String> itemsParam) {
         this.context = contextParam;
         this.items = itemsParam;
     }

@@ -174,7 +174,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:visibility="gone"
         app:backgroundTint="@color/master_card_1"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateHelper {
+    public static String convertDateToString(Date date, String format) {
+        return new SimpleDateFormat(format).format(date);
+    };
+
+    public static Date convertStringToDate(String str, String format) {
+        try {
+            return new SimpleDateFormat(format).parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    };
+
     public static Date convertToDateFromString(String str) {
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy");
         try {

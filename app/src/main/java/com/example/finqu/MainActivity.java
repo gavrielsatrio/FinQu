@@ -112,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener viewReportClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewReportActivity.class);
-                startActivity(intent);
+                if(!isFetchingNewData) {
+                    Intent intent = new Intent(MainActivity.this, ViewReportActivity.class);
+                    startActivity(intent);
+                }
             }
         };
 
@@ -145,8 +147,10 @@ public class MainActivity extends AppCompatActivity {
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent);
+                if(!isFetchingNewData) {
+                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -160,10 +164,9 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(linearLayoutTransaction.getChildCount() == 0) {
-
-                } else {
-
+                if(!isFetchingNewData) {
+                    Intent intent = new Intent(MainActivity.this, AddNewTransactionActivity.class);
+                    startActivity(intent);
                 }
             }
         });
