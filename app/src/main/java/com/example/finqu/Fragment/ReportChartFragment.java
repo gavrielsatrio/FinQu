@@ -2,9 +2,12 @@ package com.example.finqu.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.finqu.Adapter.ComboBoxAdapter;
 import com.example.finqu.Data.GlobalData;
@@ -64,7 +66,8 @@ public class ReportChartFragment extends ModifiedFragment {
                 selectedMonth = DateHelper.convertToMonthAndYearFromString(GlobalData.sheetList.get(comboBoxMonth.getSelectedItemPosition()));
 
                 LoadTotalExpenses();
-                LoadChart();
+//                LoadBarChart();
+                LoadLineChart();
             }
 
             @Override
@@ -78,7 +81,6 @@ public class ReportChartFragment extends ModifiedFragment {
 
     private void LoadComboMonth() {
         comboBoxMonth.setAdapter(new ComboBoxAdapter(viewReportActivity, GlobalData.sheetList));
-
         comboBoxMonth.setSelection(GlobalData.sheetList.indexOf(DateHelper.getMonthAndYearFromDate(DateHelper.getDateNow())));
     }
 
@@ -100,7 +102,7 @@ public class ReportChartFragment extends ModifiedFragment {
         lblTotal.setText("Total : " + NumberHelper.convertToRpFormat(totalMonthExpense));
     }
 
-    private void LoadChart() {
+    private void LoadBarChart() {
         int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).count();
         int barChartWidth = 70;
         float halfBarChartWidth = barChartWidth / 2f;
@@ -160,11 +162,6 @@ public class ReportChartFragment extends ModifiedFragment {
                     maxYData = perDayInAmount;
                 }
             }
-
-//            int perDayCumulative = perDayOutAmount >= perDayInAmount ? perDayOutAmount - perDayInAmount : perDayInAmount - perDayOutAmount;
-//            if(perDayCumulative >= maxYData) {
-//                maxYData = perDayCumulative;
-//            }
         }
 
         for (int i = 0; i < dayCount; i++) {
@@ -194,17 +191,168 @@ public class ReportChartFragment extends ModifiedFragment {
 
             paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
             canvas.drawRoundRect(startXChartCanvas + halfBarChartWidth, chartHeight - inBarChartHeight, endXChartCanvas, chartHeight, 8, 8, paint);
+        }
 
-//            int perDayCumulative = 0;
-//            if(perDayOutAmount > perDayInAmount) {
-//                perDayCumulative = perDayOutAmount - perDayInAmount;
-//                paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
-//            } else {
-//                perDayCumulative = perDayInAmount - perDayOutAmount;
-//                paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
-//            }
-//
-//            canvas.drawRoundRect(dataXDistance * (i + 0.5f) - (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding - ((perDayCumulative / (float)maxYData) * (bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding)), dataXDistance * (i + 0.5f) + (barChartWidth / 2f), bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding, 8, 8, paint);
+        imgChart.setImageBitmap(bitmap);
+    }
+
+    private void LoadLineChart() {
+        int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).count();
+        int chartDataWidth = 70;
+
+        int dataXDistance = chartDataWidth + 80;
+
+        int xAxisLabelHeight = 90;
+        int xAxisLabelMarginBottom = 35;
+        float xAxisLabelFontSize = 28f;
+
+        int bitmapHeight = 1000;
+        int bitmapTopBottomPadding = 20;
+        int chartHeight = bitmapHeight - xAxisLabelHeight - bitmapTopBottomPadding;
+
+
+        Bitmap bitmap = Bitmap.createBitmap(dayCount * dataXDistance, bitmapHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+
+        List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).collect(Collectors.toList()));
+        Collections.sort(transactionDateList);
+
+        double maxYData = 0;
+        for (int i = 0; i < dayCount; i++) {
+            Date transactionDate = transactionDateList.get(i);
+            List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
+
+            double perDayOutAmount = 0;
+            double perDayInAmount = 0;
+            for (int j = 0; j < transactionList.size(); j++) {
+                Transaction x = transactionList.get(j);
+
+                if(x.IsOut) {
+                    perDayOutAmount += x.Amount;
+                } else {
+                    perDayInAmount += x.Amount;
+                }
+            }
+
+            if(perDayOutAmount > perDayInAmount) {
+                if(perDayOutAmount > maxYData) {
+                    maxYData = perDayOutAmount;
+                }
+            } else {
+                if(perDayInAmount > maxYData) {
+                    maxYData = perDayInAmount;
+                }
+            }
+        }
+
+        float firstXChartCanvas = -1;
+        float firstOutChartDataHeight = -1;
+        float firstInChartDataHeight = -1;
+        float previousXChartCanvas = -1;
+        float previousOutChartDataHeight = -1;
+        float previousInChartDataHeight = -1;
+
+        Path polygonPathOut = new Path();
+        polygonPathOut.reset();
+
+        Path polygonPathIn = new Path();
+        polygonPathIn.reset();
+
+        for (int i = 0; i < dayCount; i++) {
+            Date transactionDate = transactionDateList.get(i);
+            List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
+
+            double perDayOutAmount = 0;
+            double perDayInAmount = 0;
+            for (int j = 0; j < transactionList.size(); j++) {
+                Transaction x = transactionList.get(j);
+
+                if(x.IsOut) {
+                    perDayOutAmount += x.Amount;
+                } else {
+                    perDayInAmount += x.Amount;
+                }
+            }
+
+            float xChartCanvas = dataXDistance * (i + 0.5f);
+
+            float outChartDataHeight = (((float)perDayOutAmount / (float)maxYData) * chartHeight) - bitmapTopBottomPadding;
+            float inChartDataHeight = (((float)perDayInAmount / (float)maxYData) * chartHeight) - bitmapTopBottomPadding;
+
+            if(i == 0) {
+                polygonPathOut.moveTo(xChartCanvas, chartHeight - outChartDataHeight);
+                polygonPathIn.moveTo(xChartCanvas, chartHeight - inChartDataHeight);
+
+                firstXChartCanvas = xChartCanvas;
+                firstOutChartDataHeight = outChartDataHeight;
+                firstInChartDataHeight = inChartDataHeight;
+
+                previousXChartCanvas = xChartCanvas;
+                previousOutChartDataHeight = outChartDataHeight;
+                previousInChartDataHeight = inChartDataHeight;
+            } else {
+                paint.setStrokeWidth(3f);
+
+                paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
+                canvas.drawLine(previousXChartCanvas, chartHeight - previousOutChartDataHeight, xChartCanvas, chartHeight - outChartDataHeight, paint);
+
+                paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
+                canvas.drawLine(previousXChartCanvas, chartHeight - previousInChartDataHeight, xChartCanvas, chartHeight - inChartDataHeight, paint);
+
+                polygonPathOut.lineTo(xChartCanvas, chartHeight - outChartDataHeight);
+                polygonPathIn.lineTo(xChartCanvas, chartHeight - inChartDataHeight);
+
+                previousXChartCanvas = xChartCanvas;
+                previousOutChartDataHeight = outChartDataHeight;
+                previousInChartDataHeight = inChartDataHeight;
+            }
+
+            if(perDayOutAmount > 0) {
+                paint.setColor(viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()));
+                canvas.drawCircle(xChartCanvas, chartHeight - outChartDataHeight, 8, paint);
+            }
+
+            if(perDayInAmount > 0) {
+                paint.setColor(viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()));
+                canvas.drawCircle(xChartCanvas, chartHeight - inChartDataHeight, 8, paint);
+            }
+        }
+
+        // Draw linear gradient in transaction
+        paint.setDither(true);
+        paint.setShader(new LinearGradient((dayCount * dataXDistance) / 2f, 0, (dayCount * dataXDistance) / 2f, bitmapHeight, viewReportActivity.getResources().getColor(R.color.green_type_in, viewReportActivity.getTheme()), viewReportActivity.getResources().getColor(R.color.none, viewReportActivity.getTheme()), Shader.TileMode.CLAMP));
+        polygonPathIn.lineTo(previousXChartCanvas, bitmapHeight);
+        polygonPathIn.lineTo(firstXChartCanvas, bitmapHeight);
+        polygonPathIn.lineTo(firstXChartCanvas, chartHeight - firstInChartDataHeight);
+        canvas.drawPath(polygonPathIn, paint);
+
+        // Draw linear gradient out transaction
+        paint.setShader(new LinearGradient((dayCount * dataXDistance) / 2f, 0, (dayCount * dataXDistance) / 2f, bitmapHeight, viewReportActivity.getResources().getColor(R.color.red_type_out, viewReportActivity.getTheme()), viewReportActivity.getResources().getColor(R.color.none, viewReportActivity.getTheme()), Shader.TileMode.CLAMP));
+        polygonPathOut.lineTo(previousXChartCanvas, bitmapHeight);
+        polygonPathOut.lineTo(firstXChartCanvas, bitmapHeight);
+        polygonPathOut.lineTo(firstXChartCanvas, chartHeight - firstOutChartDataHeight);
+        canvas.drawPath(polygonPathOut, paint);
+
+        paint.setDither(false);
+        paint.setShader(null);
+
+        // Draw x-axis background
+        paint.setColor(viewReportActivity.getResources().getColor(R.color.lightgray, viewReportActivity.getTheme()));
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(0, bitmapHeight - xAxisLabelHeight, dayCount * dataXDistance, bitmapHeight, paint);
+
+        for (int i = 0; i < dayCount; i++) {
+            Date transactionDate = transactionDateList.get(i);
+            List<Transaction> transactionList = GlobalData.transactionListGroupByDate.get(transactionDate);
+
+            // Draw date text
+            paint.setColor(viewReportActivity.getResources().getColor(R.color.darkgray, viewReportActivity.getTheme()));
+            paint.setTextSize(xAxisLabelFontSize);
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setStyle(Paint.Style.FILL);
+
+            canvas.drawText(DateHelper.convertToSuperShortStringFromDate(transactionDate), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
         }
 
         imgChart.setImageBitmap(bitmap);
