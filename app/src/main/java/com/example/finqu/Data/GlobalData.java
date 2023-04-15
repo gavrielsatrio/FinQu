@@ -76,7 +76,7 @@ public class GlobalData {
                     String paidBy = resultMonthlySheet.getJSONArray(currentIndex).getString(5);
                     String paymentType = resultMonthlySheet.getJSONArray(currentIndex).getString(6).trim();
                     Boolean isCheck = resultMonthlySheet.getJSONArray(currentIndex).getBoolean(7);
-                    Integer amount = resultMonthlySheet.getJSONArray(currentIndex).getInt(8);
+                    Integer amount = resultMonthlySheet.getJSONArray(currentIndex).length() >= 9 ? resultMonthlySheet.getJSONArray(currentIndex).getInt(8) : 0;
 
                     if(!currentDate.equals(date)) {
                         if(!date.equals("")) {
