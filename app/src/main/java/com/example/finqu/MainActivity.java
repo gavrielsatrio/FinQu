@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton btnRefresh;
     RecyclerView recViewSkeleton;
 
+    ImageView imgEmpty;
+    TextView lblEmpty;
+    TextView lblEmptyDesc;
+
     private String dateState = "start";
     public boolean isFetchingNewData = false;
 
@@ -67,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         btnSetting = findViewById(R.id.mainBtnSetting);
         btnRefresh = findViewById(R.id.mainBtnRefresh);
         recViewSkeleton = findViewById(R.id.mainRecViewSkeleton);
+        imgEmpty = findViewById(R.id.mainImgEmpty);
+        lblEmpty = findViewById(R.id.mainLblEmpty);
+        lblEmptyDesc = findViewById(R.id.mainLblEmptyDesc);
 
         txtStartDate.setKeyListener(null);
         txtEndDate.setKeyListener(null);
@@ -217,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
         Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
 
         linearLayoutTransaction.setVisibility(View.INVISIBLE);
+        imgEmpty.setVisibility(View.GONE);
+        lblEmpty.setVisibility(View.GONE);
+        lblEmptyDesc.setVisibility(View.GONE);
+
         recViewSkeleton.setVisibility(View.VISIBLE);
 
         recViewSkeleton.setLayoutManager(new GridLayoutManager(MainActivity.this, 1, RecyclerView.VERTICAL, false));
@@ -239,8 +250,14 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         if(query.size() == 0) {
                             btnRefresh.setVisibility(View.VISIBLE);
+                            imgEmpty.setVisibility(View.VISIBLE);
+                            lblEmpty.setVisibility(View.VISIBLE);
+                            lblEmptyDesc.setVisibility(View.VISIBLE);
                         } else {
                             btnRefresh.setVisibility(View.INVISIBLE);
+                            imgEmpty.setVisibility(View.GONE);
+                            lblEmpty.setVisibility(View.GONE);
+                            lblEmptyDesc.setVisibility(View.GONE);
                         }
 
                         linearLayoutTransaction.setVisibility(View.VISIBLE);

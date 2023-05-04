@@ -32,7 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ReportSummaryFragment extends ModifiedFragment {
     private ViewReportActivity viewReportActivity;
 
-    public List<String> shownTransactionTypeList = GlobalData.transactionTypeList.stream().filter(x -> !x.equals("Income") && !x.equals("Bank Transfer")).collect(Collectors.toList());
+    public List<String> shownTransactionTypeList = GlobalData.transactionTypeList;
     public List<String> selectedTransactionTypeList;
     public List<TransactionTypePillController> transactionTypePillList;
 
@@ -106,20 +106,22 @@ public class ReportSummaryFragment extends ModifiedFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Transaction> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && selectedTransactionTypeList.stream().anyMatch(y -> y.equals(x.TransactionType))).collect(Collectors.toList());
+                List<Transaction> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && x.Date.getYear() == DateHelper.getDateNow().getYear() && selectedTransactionTypeList.stream().anyMatch(y -> y.equals(x.TransactionType))).collect(Collectors.toList());
                 transactionList.forEach(x ->
                 {
-                    if(x.IsOut) {
-                        totalExpenses += x.Amount;
-                    } else {
-                        totalExpenses -= x.Amount;
+                    if(!x.TransactionType.equals("Income")) {
+                        if(x.IsOut) {
+                            totalExpenses += x.Amount;
+                        } else {
+                            totalExpenses -= x.Amount;
+                        }
                     }
                 });
 
                 List<TransactionTypeSummary> transactionTypeSummaryList = new ArrayList<>();
                 selectedTransactionTypeList.forEach(x ->
                 {
-                    transactionTypeSummaryList.add(new TransactionTypeSummary(x, GlobalData.transactionList.stream().filter(y -> y.Date.getMonth() == DateHelper.getDateNow().getMonth() && y.TransactionType.equals(x)).collect(Collectors.summingInt(y -> y.IsOut ? y.Amount : (-1 * y.Amount)))));
+                    transactionTypeSummaryList.add(new TransactionTypeSummary(x, GlobalData.transactionList.stream().filter(y -> y.Date.getMonth() == DateHelper.getDateNow().getMonth() && y.Date.getYear() == DateHelper.getDateNow().getYear() && y.TransactionType.equals(x)).collect(Collectors.summingInt(y -> y.IsOut ? y.Amount : (y.TransactionType.equals("Income") ? y.Amount : -1 * y.Amount)))));
                 });
 
                 viewReportActivity.runOnUiThread(new Runnable() {
