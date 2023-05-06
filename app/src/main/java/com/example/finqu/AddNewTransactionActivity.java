@@ -150,17 +150,17 @@ public class AddNewTransactionActivity extends AppCompatActivity {
                         currentRowNo = transactionOnTheSelectedDate.get(0).RowNoInExcel;
                         insertPosition = "afterThisRow";
                     } else {
-                        if(transactionBeforeTheSelectedDate.size() == 0) {
-                            currentRowNo = transactionAfterTheSelectedDate.get(transactionAfterTheSelectedDate.size() - 1).RowNoInExcel;
-                            insertPosition = "beforeThisRow";
-                        } else if(transactionAfterTheSelectedDate.size() == 0) {
+                        if(transactionBeforeTheSelectedDate.size() > 0) {
                             currentRowNo = transactionBeforeTheSelectedDate.get(0).RowNoInExcel;
                             insertPosition = "afterThisRow";
+                        } else {
+                            currentRowNo = transactionAfterTheSelectedDate.get(transactionAfterTheSelectedDate.size() - 1).RowNoInExcel;
+                            insertPosition = "beforeThisRow";
                         }
                     }
                 }
 
-                String postURL = "https://script.google.com/macros/s/AKfycby_BoKi16WITYQgqQrzQP5PP8MMmC4svRHuYY6hNS4jULaxWPUiuTqPa4PZ22qs2HkWzQ/exec?action=addNewDataToSheet&sheetName=" + selectedDateMonthName.replace(" ", "%20") + "&rowNo=" + currentRowNo + "&insertPosition=" + insertPosition;
+                String postURL = "https://script.google.com/macros/s/AKfycbzAfyt3aN4ddAObcbG5yIE1ujsjTqUvt9EPmoI0YsjPvs78g-H98-OReYfJDa1YivQWlQ/exec?action=addNewDataToSheet&sheetName=" + selectedDateMonthName.replace(" ", "%20") + "&rowNo=" + currentRowNo + "&insertPosition=" + insertPosition;
 
                 if(!isAddingNewData) {
                     isAddingNewData = true;
