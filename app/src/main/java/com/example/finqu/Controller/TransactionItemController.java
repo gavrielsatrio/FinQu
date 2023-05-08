@@ -1,9 +1,10 @@
 package com.example.finqu.Controller;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import com.example.finqu.MainActivity;
 import com.example.finqu.Model.Transaction;
 import com.example.finqu.R;
 
-public class TransactionController {
+public class TransactionItemController {
     public Boolean isEditDeleteMenuShown = false;
     private final View viewInflate;
     private MainActivity mainActivity;
@@ -30,12 +31,13 @@ public class TransactionController {
     private TextView lblPaymentType;
     private ImageView imgTransactionType;
     private TextView lblAmount;
+    private CardView cardViewContainer;
     private ConstraintLayout constLayoutInfo;
     private Button btnEdit;
     private Button btnDelete;
     private Button btnDetail;
 
-    public TransactionController(MainActivity mainActivityParam, Transaction transactionParam) {
+    public TransactionItemController(MainActivity mainActivityParam, Transaction transactionParam) {
         this.mainActivity = mainActivityParam;
         this.currentTransaction = transactionParam;
         this.viewInflate = LayoutInflater.from(mainActivityParam).inflate(R.layout.item_layout_transaction, null, false);
@@ -44,12 +46,14 @@ public class TransactionController {
         this.lblPaymentType = viewInflate.findViewById(R.id.transactionLblPaymentType);
         this.imgTransactionType = viewInflate.findViewById(R.id.transactionImgTransactionType);
         this.lblAmount = viewInflate.findViewById(R.id.transactionLblAmount);
+        this.cardViewContainer = viewInflate.findViewById(R.id.transactionCardView);
         this.constLayoutInfo = viewInflate.findViewById(R.id.transactionConstLayoutInfo);
         this.btnEdit = viewInflate.findViewById(R.id.transactionBtnEdit);
         this.btnDelete = viewInflate.findViewById(R.id.transactionBtnDelete);
         this.btnDetail = viewInflate.findViewById(R.id.transactionBtnDetail);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void setDataAndEventsToView() {
         lblName.setText(currentTransaction.Name);
         lblPaymentType.setText(currentTransaction.PaymentType);
@@ -67,18 +71,33 @@ public class TransactionController {
         }
         lblAmount.setText(NumberHelper.convertToRpFormat(amountView));
 
-        constLayoutInfo.setOnClickListener(new View.OnClickListener() {
+        constLayoutInfo.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                if(!mainActivity.isFetchingNewData) {
-                    if(isEditDeleteMenuShown) {
-                        constLayoutInfo.animate().translationX(0).setDuration(400).setInterpolator(new AccelerateDecelerateInterpolator());
-                    } else {
-                        constLayoutInfo.animate().translationX(-160).setDuration(400).setInterpolator(new AccelerateDecelerateInterpolator());
-                    }
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        cardViewContainer.animate().scaleX(0.93f).scaleY(0.93f).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        cardViewContainer.animate().scaleX(1).scaleY(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
 
-                    isEditDeleteMenuShown = !isEditDeleteMenuShown;
+                        if(!mainActivity.isFetchingNewData) {
+                            if(isEditDeleteMenuShown) {
+                                constLayoutInfo.animate().translationX(0).setDuration(400).setInterpolator(new AccelerateDecelerateInterpolator());
+                            } else {
+                                constLayoutInfo.animate().translationX(-160).setDuration(400).setInterpolator(new AccelerateDecelerateInterpolator());
+                            }
+
+                            isEditDeleteMenuShown = !isEditDeleteMenuShown;
+                        }
+
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        cardViewContainer.animate().scaleX(1).scaleY(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
+                        break;
                 }
+
+                return true;
             }
         });
 

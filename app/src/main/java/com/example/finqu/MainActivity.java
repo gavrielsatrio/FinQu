@@ -7,11 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,15 +16,12 @@ import android.widget.TextView;
 
 import com.example.finqu.Adapter.TransactionSkeletonLoadAdapter;
 import com.example.finqu.AsyncLoad.MainActivityAsyncLoadTransactionList;
-import com.example.finqu.Controller.TransactionController;
 import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;

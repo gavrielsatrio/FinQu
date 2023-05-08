@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.finqu.Controller.TransactionController;
+import com.example.finqu.Controller.TransactionItemController;
 import com.example.finqu.Helper.DateHelper;
 import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.MainActivity;
@@ -63,7 +63,7 @@ public class MainActivityAsyncLoadTransactionList extends AsyncTask<Void, Void, 
 
             mainActivity.totalSelectedRangeExpense += calculatedAmount;
 
-            TransactionController transactionItem = new TransactionController(mainActivity, x);
+            TransactionItemController transactionItem = new TransactionItemController(mainActivity, x);
             transactionItem.setDataAndEventsToView();
 
             mainActivity.runOnUiThread(new Runnable() {
