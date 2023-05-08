@@ -76,7 +76,7 @@ public class TransactionItemController {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        cardViewContainer.animate().scaleX(0.93f).scaleY(0.93f).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
+                        cardViewContainer.animate().scaleX(0.97f).scaleY(0.97f).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
                         break;
                     case MotionEvent.ACTION_UP:
                         cardViewContainer.animate().scaleX(1).scaleY(1).setDuration(200).setInterpolator(new AccelerateDecelerateInterpolator());
