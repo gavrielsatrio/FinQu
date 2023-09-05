@@ -29,6 +29,7 @@ import com.example.finqu.R;
 import com.example.finqu.ViewReportActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -88,7 +89,7 @@ public class ReportChartFragment extends ModifiedFragment {
     private void LoadTotalExpenses() {
         totalMonthExpense = 0;
 
-        GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == selectedMonth.getMonth()).forEach(x ->
+        GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == selectedMonth.getMonth() && x.Date.getYear() == selectedMonth.getYear()).forEach(x ->
         {
             if(x.IsOut) {
                 totalMonthExpense += x.Amount;
@@ -103,7 +104,7 @@ public class ReportChartFragment extends ModifiedFragment {
     }
 
     private void LoadBarChart() {
-        int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).count();
+        int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth() && x.getYear() == selectedMonth.getYear()).count();
         int barChartWidth = 70;
         float halfBarChartWidth = barChartWidth / 2f;
 
@@ -126,7 +127,7 @@ public class ReportChartFragment extends ModifiedFragment {
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(0, bitmapHeight - xAxisLabelHeight, dayCount * dataXDistance, bitmapHeight, paint);
 
-        List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).collect(Collectors.toList()));
+        List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth() && x.getYear() == selectedMonth.getYear()).collect(Collectors.toList()));
         Collections.sort(transactionDateList);
 
         double maxYData = 0;
@@ -197,7 +198,7 @@ public class ReportChartFragment extends ModifiedFragment {
     }
 
     private void LoadLineChart() {
-        int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).count();
+        int dayCount = (int) GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth() && x.getYear() == selectedMonth.getYear()).count();
         int chartDataWidth = 70;
 
         int dataXDistance = chartDataWidth + 80;
@@ -215,7 +216,7 @@ public class ReportChartFragment extends ModifiedFragment {
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
 
-        List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth()).collect(Collectors.toList()));
+        List<Date> transactionDateList = new ArrayList<>(GlobalData.transactionListGroupByDate.keySet().stream().filter(x -> x.getMonth() == selectedMonth.getMonth() && x.getYear() == selectedMonth.getYear()).collect(Collectors.toList()));
         Collections.sort(transactionDateList);
 
         double maxYData = 0;
