@@ -102,7 +102,7 @@ public class ReportTransactionRankingFragment extends ModifiedFragment {
                 ImageView imgTransactionType = imageViewTransactionTypeList[i];
 
                 imgTransactionType.setImageDrawable(TransactionTypeHelper.getInstance(viewReportActivity).getTransactionTypeIcon(transactionType));
-                imgTransactionType.animate().setStartDelay(250 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
+                imgTransactionType.animate().setStartDelay(300 * (imageViewTransactionTypeList.length - i)).setDuration(400).translationY(0f).alpha(1).setInterpolator(new AccelerateDecelerateInterpolator()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         AnimateBouncingImage(imgTransactionType);
