@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Helper.DateHelper;
@@ -43,7 +42,7 @@ public class ReportTransactionRankingFragment extends ModifiedFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewInflate = inflater.inflate(R.layout.fragment_report_transaction_ranking, container, false);
 
-        Map<String, List<Transaction>> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && !x.TransactionType.equals("Income") && !x.TransactionType.equals("Bank Transfer"))
+        Map<String, List<Transaction>> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && x.Date.getYear() == DateHelper.getDateNow().getYear() && !x.TransactionType.equals("Income") && !x.TransactionType.equals("Bank Transfer"))
                 .collect(Collectors.groupingBy(x -> x.TransactionType));
 
         List<TransactionTypeSummary> transactionTypeSum = new ArrayList<>();
