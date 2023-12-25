@@ -54,8 +54,12 @@ public class GlobalData {
                 }
             }
 
-            for (int i = 2; i < sheetJSONArray.length(); i++) {
-                String sheetName = sheetJSONArray.getJSONObject(i).getJSONObject("properties").getString("title");
+            JSONArray transactionDataJSONArray = sheetJSONArray;
+            transactionDataJSONArray.remove(0);
+            transactionDataJSONArray.remove(0);
+
+            for (int i = transactionDataJSONArray.length() - 1; i >= Math.max(0, transactionDataJSONArray.length() - 4); i--) {
+                String sheetName = transactionDataJSONArray.getJSONObject(i).getJSONObject("properties").getString("title");
                 GlobalData.sheetList.add(sheetName);
 
                 HttpRequest requestMonthlySheet = new HttpRequest("https://sheets.googleapis.com/v4/spreadsheets/1_85IA1IJ2PH4Kb-95rfB5Eqa4I1vffdwtq2FaAShB0A/values/" + sheetName + "!A1:I200?key=AIzaSyBc2POX2kNNnxaeuB0Az6DZcD6D27aAIUM", "GET");
