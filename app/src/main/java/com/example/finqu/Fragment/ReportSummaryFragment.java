@@ -106,7 +106,9 @@ public class ReportSummaryFragment extends ModifiedFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Transaction> transactionList = GlobalData.transactionList.stream().filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && x.Date.getYear() == DateHelper.getDateNow().getYear() && selectedTransactionTypeList.stream().anyMatch(y -> y.equals(x.TransactionType))).collect(Collectors.toList());
+                List<Transaction> transactionList = GlobalData.transactionList.stream()
+                        .filter(x -> x.Date.getMonth() == DateHelper.getDateNow().getMonth() && x.Date.getYear() == DateHelper.getDateNow().getYear() && selectedTransactionTypeList.stream().anyMatch(y -> y.equals(x.TransactionType)))
+                        .collect(Collectors.toList());
                 transactionList.forEach(x ->
                 {
                     if(!x.TransactionType.equals("Income")) {

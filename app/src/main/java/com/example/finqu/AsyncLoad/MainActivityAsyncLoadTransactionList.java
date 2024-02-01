@@ -33,8 +33,8 @@ public class MainActivityAsyncLoadTransactionList extends AsyncTask<Void, Void, 
     protected Void doInBackground(Void... voids) {
         transactionList.forEach(x ->
         {
-            if(!mainActivity.currentDateOnList.equals(DateHelper.convertToStringFromDate(x.Date))) {
-                mainActivity.currentDateOnList = DateHelper.convertToStringFromDate(x.Date);
+            if(!mainActivity.currentDateOnList.equals(DateHelper.convertDateToString(x.Date, "EEEE, dd MMM yyyy"))) {
+                mainActivity.currentDateOnList = DateHelper.convertDateToString(x.Date, "EEEE, dd MMM yyyy");
 
                 View transactionDateView = LayoutInflater.from(mainActivity).inflate(R.layout.item_layout_transaction_date, null, false);
 

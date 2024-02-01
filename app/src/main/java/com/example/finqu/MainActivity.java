@@ -24,6 +24,7 @@ import com.example.finqu.Model.Transaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         txtEndDate.setKeyListener(null);
 
         Calendar calendar = Calendar.getInstance();
-        txtStartDate.setText(DateHelper.convertToShortStringFromDate(calendar.getTime()));
-        txtEndDate.setText(DateHelper.convertToShortStringFromDate(calendar.getTime()));
+        txtStartDate.setText(DateHelper.convertDateToString(calendar.getTime(), "dd MMM yyyy"));
+        txtEndDate.setText(DateHelper.convertDateToString(calendar.getTime(), "dd MMM yyyy"));
 
         LoadTransactionList();
         LoadTodayExpense();
@@ -85,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, day);
 
-                String selectedDate = DateHelper.convertToShortStringFromDate(calendar.getTime());
+                String selectedDate = DateHelper.convertDateToString(calendar.getTime(), "dd MMM yyyy");
 
                 if(dateState.equals("start")) {
                     txtStartDate.setText(selectedDate);
 
-                    Date startDate = DateHelper.convertToDateFromShortString(txtStartDate.getText().toString());
-                    Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
+                    Date startDate = DateHelper.convertStringToDate(txtStartDate.getText().toString(), "dd MMM yyyy");
+                    Date endDate = DateHelper.convertStringToDate(txtEndDate.getText().toString(), "dd MMM yyyy");
                     if(startDate.after(endDate)) {
-                        txtEndDate.setText(DateHelper.convertToShortStringFromDate(startDate));
+                        txtEndDate.setText(DateHelper.convertDateToString(startDate, "dd MMM yyyy"));
                     }
                 } else {
                     txtEndDate.setText(selectedDate);
 
-                    Date startDate = DateHelper.convertToDateFromShortString(txtStartDate.getText().toString());
-                    Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
+                    Date startDate = DateHelper.convertStringToDate(txtStartDate.getText().toString(), "dd MMM yyyy");
+                    Date endDate = DateHelper.convertStringToDate(txtEndDate.getText().toString(), "dd MMM yyyy");
                     if(endDate.before(startDate)) {
-                        txtStartDate.setText(DateHelper.convertToShortStringFromDate(endDate));
+                        txtStartDate.setText(DateHelper.convertDateToString(endDate, "dd MMM yyyy"));
                     }
                 }
 
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void LoadTodayExpense() {
-        totalTodayExpense = GlobalData.transactionList.stream().filter(x -> x.Date.equals(DateHelper.getDateNow()) && !x.TransactionType.equals("Income")).collect(Collectors.summingInt(x -> x.IsOut ? x.Amount : x.Amount * -1));
+        totalTodayExpense = Math.max(0, GlobalData.transactionList.stream().filter(x -> x.Date.equals(DateHelper.getDateNow()) && !x.TransactionType.equals("Income")).mapToInt(x -> x.IsOut ? x.Amount : x.Amount * -1).sum());
         lblTodayExpense.setText(NumberHelper.convertToRpFormat(totalTodayExpense));
     }
 
@@ -213,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayoutTransaction.removeAllViews();
 
-        Date startDate = DateHelper.convertToDateFromShortString(txtStartDate.getText().toString());
-        Date endDate = DateHelper.convertToDateFromShortString(txtEndDate.getText().toString());
+        Date startDate = DateHelper.convertStringToDate(txtStartDate.getText().toString(), "dd MMM yyyy");
+        Date endDate = DateHelper.convertStringToDate(txtEndDate.getText().toString(), "dd MMM yyyy");
 
         linearLayoutTransaction.setVisibility(View.INVISIBLE);
         imgEmpty.setVisibility(View.GONE);
@@ -229,7 +230,17 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Transaction> query = GlobalData.transactionList.stream().filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate)).collect(Collectors.toList());
+                List<Transaction> query = GlobalData.transactionList.stream()
+                        .filter(x -> (x.Date.after(startDate) && x.Date.before(endDate)) || x.Date.equals(startDate) || x.Date.equals(endDate))
+                        .sorted(
+                                new Comparator<Transaction>() {
+                                    @Override
+                                    public int compare(Transaction transaction, Transaction t1) {
+                                        return t1.Date.compareTo(transaction.Date);
+                                    }
+                                }
+                        )
+                        .collect(Collectors.toList());
                 try {
                     new MainActivityAsyncLoadTransactionList(MainActivity.this, query, linearLayoutTransaction)
                             .execute()

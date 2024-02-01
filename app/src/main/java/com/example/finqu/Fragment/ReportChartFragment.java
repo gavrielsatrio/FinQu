@@ -64,7 +64,7 @@ public class ReportChartFragment extends ModifiedFragment {
         comboBoxMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedMonth = DateHelper.convertToMonthAndYearFromString(GlobalData.sheetList.get(comboBoxMonth.getSelectedItemPosition()));
+                selectedMonth = DateHelper.convertStringToDate(GlobalData.sheetList.get(comboBoxMonth.getSelectedItemPosition()), "MMMM yyyy");
 
                 LoadTotalExpenses();
 //                LoadBarChart();
@@ -82,7 +82,7 @@ public class ReportChartFragment extends ModifiedFragment {
 
     private void LoadComboMonth() {
         comboBoxMonth.setAdapter(new ComboBoxAdapter(viewReportActivity, GlobalData.sheetList));
-        comboBoxMonth.setSelection(GlobalData.sheetList.indexOf(DateHelper.getMonthAndYearFromDate(DateHelper.getDateNow())));
+        comboBoxMonth.setSelection(GlobalData.sheetList.indexOf(DateHelper.convertDateToString(DateHelper.getDateNow(), "MMMM yyyy")));
     }
 
     private int totalMonthExpense = 0;
@@ -140,7 +140,7 @@ public class ReportChartFragment extends ModifiedFragment {
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setStyle(Paint.Style.FILL);
 
-            canvas.drawText(DateHelper.convertToSuperShortStringFromDate(transactionDate), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
+            canvas.drawText(DateHelper.convertDateToString(transactionDate, "dd MMM"), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
 
             double perDayOutAmount = 0;
             double perDayInAmount = 0;
@@ -353,7 +353,7 @@ public class ReportChartFragment extends ModifiedFragment {
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setStyle(Paint.Style.FILL);
 
-            canvas.drawText(DateHelper.convertToSuperShortStringFromDate(transactionDate), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
+            canvas.drawText(DateHelper.convertDateToString(transactionDate, "dd MMM"), dataXDistance * (i + 0.5f), bitmapHeight - xAxisLabelMarginBottom, paint);
         }
 
         imgChart.setImageBitmap(bitmap);

@@ -58,7 +58,7 @@ public class GlobalData {
             transactionDataJSONArray.remove(0);
             transactionDataJSONArray.remove(0);
 
-            for (int i = transactionDataJSONArray.length() - 1; i >= Math.max(0, transactionDataJSONArray.length() - 4); i--) {
+            for (int i = transactionDataJSONArray.length() - 1; i >= Math.max(0, transactionDataJSONArray.length() - 3); i--) {
                 String sheetName = transactionDataJSONArray.getJSONObject(i).getJSONObject("properties").getString("title");
                 GlobalData.sheetList.add(sheetName);
 
@@ -88,16 +88,16 @@ public class GlobalData {
                         }
                     }
 
-                    if(!GlobalData.transactionListGroupByDate.containsKey(DateHelper.convertToDateFromString(currentDate))) {
+                    if(!GlobalData.transactionListGroupByDate.containsKey(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy"))) {
                         ArrayList<Transaction> newDailyTransactionList = new ArrayList<>();
-                        newDailyTransactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
+                        newDailyTransactionList.add(0, new Transaction(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy"), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
 
-                        GlobalData.transactionListGroupByDate.put(DateHelper.convertToDateFromString(currentDate), newDailyTransactionList);
+                        GlobalData.transactionListGroupByDate.put(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy"), newDailyTransactionList);
                     } else {
-                        GlobalData.transactionListGroupByDate.get(DateHelper.convertToDateFromString(currentDate)).add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
+                        GlobalData.transactionListGroupByDate.get(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy")).add(0, new Transaction(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy"), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
                     }
 
-                    GlobalData.transactionList.add(0, new Transaction(DateHelper.convertToDateFromString(currentDate), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
+                    GlobalData.transactionList.add(0, new Transaction(DateHelper.convertStringToDate(currentDate, "EEEE, dd MMM yyyy"), transactionType, name, isIn, isOut, paidBy, paymentType, isCheck, amount, currentIndex + 1));
 
                     currentIndex++;
                 }

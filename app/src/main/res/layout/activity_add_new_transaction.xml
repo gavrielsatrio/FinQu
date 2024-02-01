@@ -82,7 +82,8 @@
                 android:paddingBottom="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addNewTransactionLblTransactionType" />
+                app:layout_constraintTop_toBottomOf="@+id/addNewTransactionLblTransactionType"
+                tools:listitem="@layout/item_layout_combo_box" />
 
             <RadioGroup
                 android:id="@+id/addNewTransactionRadioGroup"
@@ -145,7 +146,8 @@
                 android:paddingBottom="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addNewTransactionLblPaymentType" />
+                app:layout_constraintTop_toBottomOf="@+id/addNewTransactionLblPaymentType"
+                tools:listitem="@layout/item_layout_combo_box" />
 
             <EditText
                 android:id="@+id/addNewTransactionTxtAmount"
