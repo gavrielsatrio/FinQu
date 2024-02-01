@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import com.example.finqu.Adapter.ComboBoxAdapter;
 import com.example.finqu.Data.GlobalData;
 import com.example.finqu.Dialog.LoadingDialog;
 import com.example.finqu.Helper.DateHelper;
+import com.example.finqu.Helper.NumberHelper;
 import com.example.finqu.Model.Transaction;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -85,6 +88,34 @@ public class AddNewTransactionActivity extends AppCompatActivity {
                         calendarDate.get(Calendar.YEAR),
                         calendarDate.get(Calendar.MONTH),
                         calendarDate.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        txtAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                txtAmount.removeTextChangedListener(this);
+
+                if(txtAmount.getText().toString().equals("")) {
+                    txtAmount.addTextChangedListener(this);
+                    return;
+                }
+
+                double amount = Double.parseDouble(txtAmount.getText().toString().replace(".", ""));
+                txtAmount.setText(NumberHelper.convertToNumberFormat(amount, 0));
+                txtAmount.setSelection(txtAmount.getText().toString().length());
+
+                txtAmount.addTextChangedListener(this);
             }
         });
 
