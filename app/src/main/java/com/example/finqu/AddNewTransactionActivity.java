@@ -214,7 +214,7 @@ public class AddNewTransactionActivity extends AppCompatActivity {
                                                 .put("PaidBy", txtPaidBy.getText().toString().trim())
                                                 .put("PaymentType", GlobalData.paymentTypeList.get(comboPaymentType.getSelectedItemPosition()))
                                                 .put("IsCheck", checkPaymentStatusDone.isChecked())
-                                                .put("Amount", Integer.valueOf(txtAmount.getText().toString().trim()))
+                                                .put("Amount", Double.valueOf(txtAmount.getText().toString().trim().replace(".", "")))
                                                 .toString())
                                         .execute();
 
