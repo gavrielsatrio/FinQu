@@ -91,33 +91,7 @@ public class AddNewTransactionActivity extends AppCompatActivity {
             }
         });
 
-        txtAmount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                txtAmount.removeTextChangedListener(this);
-
-                if(txtAmount.getText().toString().equals("")) {
-                    txtAmount.addTextChangedListener(this);
-                    return;
-                }
-
-                double amount = Double.parseDouble(txtAmount.getText().toString().replace(".", ""));
-                txtAmount.setText(NumberHelper.convertToNumberFormat(amount, 0));
-                txtAmount.setSelection(txtAmount.getText().toString().length());
-
-                txtAmount.addTextChangedListener(this);
-            }
-        });
+        txtAmount.addTextChangedListener(txtAmount_TextChanged);
 
         LoadComboTransactionType();
         LoadComboPaymentType();
@@ -249,6 +223,34 @@ public class AddNewTransactionActivity extends AppCompatActivity {
             }
         });
     }
+
+    private TextWatcher txtAmount_TextChanged = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            txtAmount.removeTextChangedListener(txtAmount_TextChanged);
+
+            if(txtAmount.getText().toString().equals("")) {
+                txtAmount.addTextChangedListener(txtAmount_TextChanged);
+                return;
+            }
+
+            double amount = Double.parseDouble(txtAmount.getText().toString().replace(".", ""));
+            txtAmount.setText(NumberHelper.convertToNumberFormat(amount, 0));
+            txtAmount.setSelection(txtAmount.getText().toString().length());
+
+            txtAmount.addTextChangedListener(txtAmount_TextChanged);
+        }
+    };
 
     private void LoadComboTransactionType() {
         comboTransactionType.setAdapter(new ComboBoxAdapter(AddNewTransactionActivity.this, GlobalData.transactionTypeList.stream().filter(x -> !x.equals("All")).collect(Collectors.toList())));
