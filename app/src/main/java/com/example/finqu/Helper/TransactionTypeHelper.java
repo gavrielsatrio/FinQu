@@ -22,7 +22,7 @@ public class TransactionTypeHelper {
         transactionTypeList.put("Beverage", this.context.getResources().getDrawable(R.drawable.beverages, this.context.getTheme()));
         transactionTypeList.put("Boarding Fee", this.context.getResources().getDrawable(R.drawable.rent, this.context.getTheme()));
         transactionTypeList.put("Cake", this.context.getResources().getDrawable(R.drawable.cheesecake, this.context.getTheme()));
-        transactionTypeList.put("Desert", this.context.getResources().getDrawable(R.drawable.dessert_2, this.context.getTheme()));
+        transactionTypeList.put("Dessert", this.context.getResources().getDrawable(R.drawable.dessert_2, this.context.getTheme()));
         transactionTypeList.put("Electricity Token", this.context.getResources().getDrawable(R.drawable.flash, this.context.getTheme()));
         transactionTypeList.put("Food", this.context.getResources().getDrawable(R.drawable.food, this.context.getTheme()));
         transactionTypeList.put("Income", this.context.getResources().getDrawable(R.drawable.money_bag, this.context.getTheme()));
