@@ -62,7 +62,7 @@ public class GlobalData {
                 String sheetName = transactionDataJSONArray.getJSONObject(i).getJSONObject("properties").getString("title");
                 GlobalData.sheetList.add(sheetName);
 
-                HttpRequest requestMonthlySheet = new HttpRequest("https://sheets.googleapis.com/v4/spreadsheets/1_85IA1IJ2PH4Kb-95rfB5Eqa4I1vffdwtq2FaAShB0A/values/" + sheetName + "!A1:I200?key=AIzaSyBc2POX2kNNnxaeuB0Az6DZcD6D27aAIUM", "GET");
+                HttpRequest requestMonthlySheet = new HttpRequest("https://sheets.googleapis.com/v4/spreadsheets/1_85IA1IJ2PH4Kb-95rfB5Eqa4I1vffdwtq2FaAShB0A/values/" + sheetName + "!A1:I300?key=AIzaSyBc2POX2kNNnxaeuB0Az6DZcD6D27aAIUM", "GET");
                 requestMonthlySheet.setRequestProperty("Content-Type", "application/json");
                 requestMonthlySheet.execute();
 
