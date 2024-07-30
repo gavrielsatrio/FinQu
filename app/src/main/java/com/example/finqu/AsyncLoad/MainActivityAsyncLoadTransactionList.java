@@ -79,7 +79,7 @@ public class MainActivityAsyncLoadTransactionList extends AsyncTask<Void, Void, 
             layoutParams.setMargins(0, 8, 0, 8);
 
             TextView lblSelectedRangeExpense = new TextView(mainActivity);
-            lblSelectedRangeExpense.setText("Selected range total expenses : " + NumberHelper.convertToRpFormat(mainActivity.totalSelectedRangeExpense));
+            lblSelectedRangeExpense.setText("Selected range total expenses : " + NumberHelper.convertToRpFormat(Math.max(mainActivity.totalSelectedRangeExpense, 0)));
             lblSelectedRangeExpense.setLayoutParams(layoutParams);
             lblSelectedRangeExpense.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             lblSelectedRangeExpense.setTypeface(mainActivity.getResources().getFont(R.font.sf_pro_display_medium));
